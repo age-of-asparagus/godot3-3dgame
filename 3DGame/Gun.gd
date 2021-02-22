@@ -21,11 +21,11 @@ func shoot():
 		new_bullet.speed = muzzle_speed
 		var scene_root = get_tree().get_root().get_children()[0]
 		scene_root.add_child(new_bullet)
-		print("pew!")
+#		print("pew!")
 		can_shoot = false
 		rof_timer.start()
 
 
 func _on_Timer_timeout():
-	print("YOu can shoot again bra")
+#	print("You can shoot again bra")
 	can_shoot = true
