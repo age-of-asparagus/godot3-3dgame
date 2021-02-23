@@ -26,3 +26,4 @@ func update_path(target_position):
 func _on_Timer_timeout():
 	print("Looking for Player!")
 	update_path(player.global_transform.origin)
+	current_node = 0
