@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleMesh" id=1]
 
@@ -24,4 +25,7 @@ shape = SubResource( 3 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
+
+[node name="Stats" parent="." instance=ExtResource( 2 )]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="you_died_signal" from="Stats" to="." method="_on_Stats_you_died_signal"]
