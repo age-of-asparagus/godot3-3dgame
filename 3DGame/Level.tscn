@@ -1,16 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
+[ext_resource path="res://ObstacleMaterial.tres" type="Material" id=3]
+[ext_resource path="res://LevelGrid.tres" type="Material" id=4]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=5]
 
 [sub_resource type="NavigationMesh" id=1]
 vertices = PoolVector3Array( 7.9, 0.4, -6.5, 7.9, 0.4, -4.4, 9.4, 0.4, -5, 7.3, 0.4, -7.4, 7.9, 0.4, -6.5, 9.4, 0.4, -5, 9.4, 0.4, -9.5, 3.7, 0.4, -7.7, 7.3, 0.4, -7.4, 9.4, 0.4, -9.5, -0.2, 0.4, -9.5, -9.5, 0.4, -3.8, -6.5, 0.4, -3.8, -6.5, 0.4, -5.3, -1.4, 0.4, -3.8, 2.5, 0.4, -3.8, 2.5, 0.4, -6.5, -2, 0.4, -6.2, -0.2, 0.4, -9.5, -9.5, 0.4, -9.5, -5.3, 0.4, -6.5, -2, 0.4, -6.2, 2.5, 0.4, -6.5, 3.7, 0.4, -7.7, -9.5, 0.4, -3.8, -6.5, 0.4, -5.3, -5.3, 0.4, -6.5, -9.5, 0.4, -9.5, 2.5, 0.4, 7.6, 0.1, 0.4, 7.6, 0.1, 0.4, 9.4, 4, 0.4, -0.2, 2.8, 0.4, 2.8, 3.7, 0.4, 3.7, 6.7, 0.4, -0.2, 3.4, 0.4, 7, 2.5, 0.4, 7.6, 0.1, 0.4, 9.4, 9.4, 0.4, 9.4, 9.4, 0.4, -5, 7.9, 0.4, -4.4, 7.6, 0.4, -0.799999, 9.4, 0.4, 2.2, 6.7, 0.4, -0.2, 3.7, 0.4, 3.7, 3.4, 0.4, 7, 9.4, 0.4, 9.4, 9.4, 0.4, 2.2, 7.6, 0.4, -0.799999, -6.5, 0.4, -2.6, -6.5, 0.4, -3.8, -9.5, 0.4, -3.8, 2.8, 0.4, 2.8, 4, 0.4, -0.2, 2.5, 0.4, -1.4, -2, 0.4, -1.7, -5.3, 0.4, -1.4, -4.4, 0.4, 2.5, 2.5, 0.4, -1.4, 2.5, 0.4, -3.8, -1.4, 0.4, -3.8, -2, 0.4, -1.7, -9.5, 0.4, 2.8, -9.5, 0.4, 9.4, -5.6, 0.4, 6.4, -5.3, 0.4, 3.1, -5.3, 0.4, -1.4, -6.5, 0.4, -2.6, -9.5, 0.4, -3.8, -9.5, 0.4, 2.8, -5.3, 0.4, 3.1, -4.4, 0.4, 2.5, 0.1, 0.4, 9.4, 0.1, 0.4, 7.6, -5, 0.4, 7.3, -9.5, 0.4, 9.4, -9.5, 0.4, 9.4, -5, 0.4, 7.3, -5.6, 0.4, 6.4 )
 polygons = [ PoolIntArray( 2, 1, 0 ), PoolIntArray( 4, 3, 5 ), PoolIntArray( 5, 3, 6 ), PoolIntArray( 8, 7, 9 ), PoolIntArray( 9, 7, 10 ), PoolIntArray( 13, 12, 11 ), PoolIntArray( 15, 14, 16 ), PoolIntArray( 16, 14, 17 ), PoolIntArray( 23, 22, 18 ), PoolIntArray( 18, 22, 21 ), PoolIntArray( 18, 21, 20 ), PoolIntArray( 18, 20, 19 ), PoolIntArray( 25, 24, 26 ), PoolIntArray( 26, 24, 27 ), PoolIntArray( 30, 29, 28 ), PoolIntArray( 32, 31, 33 ), PoolIntArray( 33, 31, 34 ), PoolIntArray( 36, 35, 37 ), PoolIntArray( 37, 35, 38 ), PoolIntArray( 40, 39, 41 ), PoolIntArray( 41, 39, 42 ), PoolIntArray( 48, 47, 43 ), PoolIntArray( 43, 47, 44 ), PoolIntArray( 44, 47, 45 ), PoolIntArray( 45, 47, 46 ), PoolIntArray( 49, 51, 50 ), PoolIntArray( 53, 52, 54 ), PoolIntArray( 54, 52, 55 ), PoolIntArray( 55, 52, 57 ), PoolIntArray( 55, 57, 56 ), PoolIntArray( 59, 58, 60 ), PoolIntArray( 60, 58, 61 ), PoolIntArray( 65, 64, 62 ), PoolIntArray( 62, 64, 63 ), PoolIntArray( 71, 70, 66 ), PoolIntArray( 66, 70, 67 ), PoolIntArray( 67, 70, 69 ), PoolIntArray( 67, 69, 68 ), PoolIntArray( 73, 72, 74 ), PoolIntArray( 74, 72, 75 ), PoolIntArray( 78, 77, 76 ) ]
 agent/radius = 1.5
-
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.796078, 0.109804, 0.964706, 1 )
 
 [node name="Level" type="Spatial"]
 script = ExtResource( 2 )
@@ -37,24 +36,25 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.10368, 0, -7.43496 )
 navmesh = SubResource( 1 )
 
 [node name="Ground" type="CSGBox" parent="Navigation/NavigationMeshInstance"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+transform = Transform( 0.999961, -0.00773113, 0.00425405, 0.00776231, 0.999943, -0.00736045, -0.00419689, 0.00739319, 0.999964, 0, -1, 0 )
 use_collision = true
 width = 22.0
 depth = 22.0
+material = ExtResource( 4 )
 
 [node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance"]
 transform = Transform( 0.999955, -0.00952935, 0, 0.00952935, 0.999955, 0, 0, 0, 1, -4, 1, -4 )
 use_collision = true
-material = SubResource( 2 )
+material = ExtResource( 3 )
 
 [node name="CSGBox3" type="CSGBox" parent="Navigation/NavigationMeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.17369, 1, -4 )
 use_collision = true
 depth = 4.0
-material = SubResource( 2 )
+material = ExtResource( 3 )
 
 [node name="CSGBox2" type="CSGBox" parent="Navigation/NavigationMeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 5 )
 use_collision = true
 width = 6.0
-material = SubResource( 2 )
+material = ExtResource( 3 )
