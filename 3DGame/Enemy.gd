@@ -1,5 +1,7 @@
 extends KinematicBody
 
+class_name Enemy
+
 onready var nav = $"../Navigation" as Navigation
 onready var player = $"../Player" as KinematicBody
 

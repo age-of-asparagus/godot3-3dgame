@@ -9,13 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Enemy.gd"
+}, {
 "base": "Node",
 "class": "Stats",
 "language": "GDScript",
 "path": "res://Stats.gd"
+}, {
+"base": "Node",
+"class": "Wave",
+"language": "GDScript",
+"path": "res://Node.gd"
 } ]
 _global_script_class_icons={
-"Stats": ""
+"Enemy": "",
+"Stats": "",
+"Wave": ""
 }
 
 [application]
