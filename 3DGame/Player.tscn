@@ -17,7 +17,7 @@ albedo_color = Color( 0.0901961, 0.0823529, 0.0823529, 1 )
 [sub_resource type="CapsuleShape" id=5]
 
 [node name="Player" type="KinematicBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42765, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
