@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "KinematicBody",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://Enemy.gd"
+"path": "res://Enemy/Enemy.gd"
 }, {
 "base": "Node",
 "class": "Stats",
@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Wave",
 "language": "GDScript",
-"path": "res://Node.gd"
+"path": "res://Spawning/Wave.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="3D Game"
-run/main_scene="res://Level.tscn"
+run/main_scene="res://Level/Level.tscn"
 config/icon="res://icon.png"
 
 [input]
@@ -78,6 +78,7 @@ primary_action={
 3d_physics/layer_1="World"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Enemy"
+3d_physics/layer_4="Ground"
 
 [rendering]
 

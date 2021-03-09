@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Bullet.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/Bullet.gd" type="Script" id=1]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -8,7 +8,7 @@
 albedo_color = Color( 0.0705882, 0.0666667, 0.0666667, 1 )
 
 [sub_resource type="BoxShape" id=3]
-extents = Vector3( 0.101097, 0.101618, 0.104083 )
+extents = Vector3( 0.101097, 0.101618, 0.555616 )
 
 [node name="Bullet" type="Spatial"]
 script = ExtResource( 1 )
