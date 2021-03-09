@@ -13,7 +13,7 @@ func _ready():
 
 func take_hit(damage):
 	
-	current_HP -= 1
+	current_HP -= damage
 	print("I'm hit!! ", current_HP,  "/", max_HP)
 	
 	if current_HP <= 0:

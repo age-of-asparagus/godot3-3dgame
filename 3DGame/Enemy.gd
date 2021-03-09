@@ -33,33 +33,38 @@ func _ready():
 	$MeshInstance.set_surface_material(0, default_material)
 
 func _physics_process(delta):
-	
-	match current_state:
-		state.SEEKING:	
-			if current_node < path.size():
-				var direction: Vector3 = path[current_node] - global_transform.origin
-				if direction.length() < 1:
-					current_node += 1
-				else:
-					move_and_slide(direction.normalized() * speed)
-		state.ATTACKING:
-			move_and_attack()
-		state.RETURNING:
-			move_and_attack()
-		state.RESTING:
-			print("Resting!")			
+	if player:
+		match current_state:
+			state.SEEKING:	
+				if current_node < path.size():
+					var direction: Vector3 = path[current_node] - global_transform.origin
+					if direction.length() < 1:
+						current_node += 1
+					else:
+						move_and_slide(direction.normalized() * speed)
+			state.ATTACKING:
+				move_and_attack()
+			state.RETURNING:
+				move_and_attack()
+			state.RESTING:
+				pass
+	#			print("Resting!")			
 			
 func move_and_attack():
 	var attack_vector: Vector3 = attack_target - global_transform.origin
 	var direction: Vector3 = attack_vector.normalized()
 	var distance = attack_vector.length()
 	
-	print("I'm this far away from my target: ", distance)
+#	print("I'm this far away from my target: ", distance)
 	move_and_slide(direction * speed * attack_speed_multiplier)
 	
 	if distance < 1:
 		match current_state:
 			state.ATTACKING:
+				# Do damage to the player
+				var player_stats: Stats = player.get_node("Stats")
+				player_stats.take_hit(1)
+				print("I hit you: ", player_stats.current_HP, "/", player_stats.max_HP)
 				current_state = state.RETURNING
 				attack_target = return_target
 			state.RETURNING:
@@ -91,8 +96,9 @@ func _on_AttackRadius_body_entered(body):
 
 func _on_PathUpdateTimer_timeout():
 #	print("Looking for Player!")
-	update_path(player.global_transform.origin)
-	current_node = 0
+	if player:
+		update_path(player.global_transform.origin)
+		current_node = 0
 
 
 func _on_AttackTimer_timeout():
