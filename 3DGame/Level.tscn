@@ -69,7 +69,6 @@ Enemy = ExtResource( 5 )
 [node name="Wave" type="Node" parent="Spawner/Waves"]
 script = ExtResource( 7 )
 num_enemies = 2
-second_between_spawns = 2.0
 
 [node name="Wave2" type="Node" parent="Spawner/Waves"]
 script = ExtResource( 7 )

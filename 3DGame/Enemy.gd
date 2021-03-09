@@ -66,6 +66,7 @@ func move_and_attack():
 				current_state = state.RESTING
 				$MeshInstance.set_surface_material(0, resting_material)
 				collide_with_other_enemies(true)
+				move_and_slide(Vector3.ZERO)
 				attack_timer.start()
 				
 func collide_with_other_enemies(should_we_collide):

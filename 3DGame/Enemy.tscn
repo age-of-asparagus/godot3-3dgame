@@ -6,9 +6,10 @@
 
 [sub_resource type="CapsuleMesh" id=1]
 
-[sub_resource type="CapsuleShape" id=3]
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.8
 
-[sub_resource type="CylinderShape" id=4]
+[sub_resource type="CylinderShape" id=3]
 radius = 2.5
 
 [node name="Enemy" type="KinematicBody"]
@@ -24,7 +25,7 @@ material/0 = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="PathUpdateTimer" type="Timer" parent="."]
 wait_time = 0.25
@@ -35,7 +36,7 @@ autostart = true
 [node name="AttackRadius" type="Area" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="AttackRadius"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
