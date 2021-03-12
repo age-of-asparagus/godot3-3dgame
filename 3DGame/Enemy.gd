@@ -33,15 +33,20 @@ func _ready():
 	$MeshInstance.set_surface_material(0, default_material)
 
 func _physics_process(delta):
-	if player:
+	if is_instance_valid(player):
 		match current_state:
 			state.SEEKING:	
 				if current_node < path.size():
-					var direction: Vector3 = path[current_node] - global_transform.origin
-					if direction.length() < 1:
+					var seeking_vector: Vector3 = path[current_node] - global_transform.origin
+					move_and_slide(seeking_vector.normalized() * speed)
+					seeking_vector = path[current_node] - global_transform.origin
+					if seeking_vector.length() < 1:
 						current_node += 1
-					else:
-						move_and_slide(direction.normalized() * speed)
+						
+					# Check if we're close to the player
+					if $AttackRadius.overlaps_body(player):
+						init_attack()
+					
 			state.ATTACKING:
 				move_and_attack()
 			state.RETURNING:
@@ -85,18 +90,17 @@ func update_path(target_position):
 func _on_Stats_you_died_signal():
 	queue_free()
 
-func _on_AttackRadius_body_entered(body):
-	if body == player:
-		attack_target = player.global_transform.origin
-		return_target = global_transform.origin
-		current_state = state.ATTACKING
-		$MeshInstance.set_surface_material(0, attack_material)
-		collide_with_other_enemies(false)
+func init_attack():
+	attack_target = player.global_transform.origin
+	return_target = global_transform.origin
+	current_state = state.ATTACKING
+	$MeshInstance.set_surface_material(0, attack_material)
+	collide_with_other_enemies(false)
 
 
 func _on_PathUpdateTimer_timeout():
 #	print("Looking for Player!")
-	if player:
+	if is_instance_valid(player):
 		update_path(player.global_transform.origin)
 		current_node = 0
 
