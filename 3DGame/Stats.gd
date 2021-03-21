@@ -3,7 +3,7 @@ extends Node
 class_name Stats
 
 export var max_HP = 10
-var current_HP = max_HP
+onready var current_HP = max_HP
 
 signal you_died_signal
 

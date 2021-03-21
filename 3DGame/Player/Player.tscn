@@ -5,9 +5,6 @@
 [ext_resource path="res://Weapons/Gun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Stats.tscn" type="PackedScene" id=4]
 
-
-
-
 [sub_resource type="CapsuleMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=2]
@@ -28,6 +25,7 @@ __meta__ = {
 }
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
+max_HP = 7
 
 [node name="Body" type="MeshInstance" parent="."]
 transform = Transform( -4.37114e-08, 1, 0, 0, 0, -1, -1, -4.37114e-08, 0, 0, 0, 0 )
