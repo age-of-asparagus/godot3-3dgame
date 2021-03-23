@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Level/LevelGenerator/LevelGenerator.gd" type="Script" id=1]
+[ext_resource path="res://Level/LevelGenerator/Ground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Level/LevelGenerator/Obstacle.tscn" type="PackedScene" id=3]
+
+[node name="Map" type="Spatial"]
+script = ExtResource( 1 )
+GroundScene = ExtResource( 2 )
+ObstacleScene = ExtResource( 3 )
+map_width = 15
+map_depth = 13
+obstacle_ratio = 0.25
