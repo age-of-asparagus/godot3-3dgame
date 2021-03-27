@@ -8,6 +8,4 @@
 script = ExtResource( 1 )
 GroundScene = ExtResource( 2 )
 ObstacleScene = ExtResource( 3 )
-map_width = 15
-map_depth = 13
-obstacle_ratio = 0.25
+obstacle_density = 0.5
