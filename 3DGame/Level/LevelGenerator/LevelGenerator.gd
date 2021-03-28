@@ -12,6 +12,9 @@ export(float, 0, 1, 0.05) var obstacle_density = 0.2 setget set_obstacle_density
 export(float, 1, 5) var obstacle_max_height = 5 setget set_max_obs_height
 export(float, 1, 5) var obstacle_min_height = 1 setget set_min_obs_height
 
+export(Color) var foreground_color: Color setget set_fore_color
+export(Color) var background_color: Color setget set_back_color
+
 export(int) var rng_seed = 12345 setget set_seed
 
 var map_coords_array := []
@@ -31,6 +34,14 @@ class Coord:
 func _ready():
 	generate_map()
 	
+func set_back_color(new_val):
+	background_color = new_val
+	generate_map()
+	
+func set_fore_color(new_val):
+	foreground_color = new_val
+	generate_map()
+
 func set_max_obs_height(new_val):
 	obstacle_max_height = max(new_val, obstacle_min_height)
 	generate_map()
@@ -106,9 +117,17 @@ func create_obstacle_at(x, z):
 	obstacle_position += Vector3(-map_width + 1, 0, -map_depth + 1)
 	var new_obstacle: CSGBox = ObstacleScene.instance()
 	new_obstacle.height = get_obstacle_height()
+	
+	# New material and set it's color
+	var new_material := SpatialMaterial.new()
+	new_material.albedo_color = get_color_at_depth(z)
+	new_obstacle.material = new_material
+	
 	new_obstacle.transform.origin = obstacle_position + Vector3(0, new_obstacle.height/2, 0)
 	add_child(new_obstacle)
 
 func get_obstacle_height():
 	return rand_range(obstacle_min_height, obstacle_max_height)
 	
+func get_color_at_depth(z):
+	return background_color.linear_interpolate(foreground_color, float(z)/map_depth)
