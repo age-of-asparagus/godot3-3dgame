@@ -3,6 +3,5 @@
 [ext_resource path="res://Level/ObstacleMaterial.tres" type="Material" id=1]
 
 [node name="CSGBox" type="CSGBox"]
-transform = Transform( 0.999955, -0.00952935, 0, 0.00952935, 0.999955, 0, 0, 0, 1, -4, 1, -4 )
 use_collision = true
 material = ExtResource( 1 )

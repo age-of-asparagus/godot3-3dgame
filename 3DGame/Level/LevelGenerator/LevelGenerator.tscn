@@ -8,4 +8,6 @@
 script = ExtResource( 1 )
 GroundScene = ExtResource( 2 )
 ObstacleScene = ExtResource( 3 )
-obstacle_density = 0.5
+obstacle_density = 0.45
+obstacle_max_height = 3.937
+rng_seed = 12346
