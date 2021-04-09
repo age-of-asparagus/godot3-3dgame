@@ -8,8 +8,10 @@
 script = ExtResource( 1 )
 GroundScene = ExtResource( 2 )
 ObstacleScene = ExtResource( 3 )
+map_width = 19
+map_depth = 15
 obstacle_density = 0.45
-obstacle_max_height = 3.937
-foreground_color = Color( 0.937255, 0.0509804, 0.0509804, 1 )
-background_color = Color( 0.0470588, 0.141176, 0.639216, 1 )
+obstacle_max_height = 4.58
+foreground_color = Color( 0.141176, 0.0509804, 0.937255, 1 )
+background_color = Color( 0.639216, 0.0470588, 0.0470588, 1 )
 rng_seed = 12346

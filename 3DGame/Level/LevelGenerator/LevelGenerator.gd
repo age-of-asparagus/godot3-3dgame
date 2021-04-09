@@ -4,6 +4,8 @@ extends Spatial
 export var GroundScene: PackedScene
 export var ObstacleScene: PackedScene
 
+var shader_material : ShaderMaterial
+
 export(int, 1, 21) var map_width = 11 setget set_width
 export(int, 1, 15) var map_depth = 11 setget set_depth
 
@@ -86,6 +88,7 @@ func generate_map():
 	
 	clear_map()
 	add_ground()
+	update_obstacle_material()
 	add_obstacles()
 	
 func clear_map():
@@ -97,6 +100,13 @@ func add_ground():
 	ground.width = map_width * 2
 	ground.depth = map_depth * 2 
 	add_child(ground)
+	
+func update_obstacle_material():
+	var temp_obstacle: CSGBox = ObstacleScene.instance()
+	shader_material = temp_obstacle.material as ShaderMaterial
+	shader_material.set_shader_param("ForegroundColor", foreground_color)
+	shader_material.set_shader_param("BackgroundColor", background_color)
+	shader_material.set_shader_param("LevelDepth", map_depth*2)
 	
 func add_obstacles():
 	fill_map_coords_array()
@@ -119,9 +129,9 @@ func create_obstacle_at(x, z):
 	new_obstacle.height = get_obstacle_height()
 	
 	# New material and set it's color
-	var new_material := SpatialMaterial.new()
-	new_material.albedo_color = get_color_at_depth(z)
-	new_obstacle.material = new_material
+#	var new_material := SpatialMaterial.new()
+#	new_material.albedo_color = get_color_at_depth(z)
+#	new_obstacle.material = new_material
 	
 	new_obstacle.transform.origin = obstacle_position + Vector3(0, new_obstacle.height/2, 0)
 	add_child(new_obstacle)

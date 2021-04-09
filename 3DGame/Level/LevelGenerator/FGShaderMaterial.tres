@@ -1,0 +1,140 @@
+[gd_resource type="ShaderMaterial" load_steps=14 format=2]
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=10]
+uniform_name = "LevelDepth"
+
+[sub_resource type="VisualShaderNodeInput" id=1]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=2]
+
+[sub_resource type="VisualShaderNodeColorUniform" id=3]
+uniform_name = "ForegroundColor"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=4]
+uniform_name = "BackgroundColor"
+
+[sub_resource type="VisualShaderNodeVectorScalarMix" id=5]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 1, 1, 1 ), 2, 0.0 ]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=11]
+default_input_values = [ 0, 0.0, 1, 22.0 ]
+operator = 3
+
+[sub_resource type="VisualShaderNodeScalarOp" id=12]
+default_input_values = [ 0, 0.0, 1, 0.5 ]
+
+[sub_resource type="VisualShaderNodeInput" id=6]
+input_name = "vertex"
+
+[sub_resource type="VisualShaderNodeInput" id=7]
+input_name = "world"
+
+[sub_resource type="VisualShaderNodeTransformVecMult" id=8]
+
+[sub_resource type="VisualShaderNodeVectorOp" id=13]
+operator = 1
+
+[sub_resource type="VisualShader" id=9]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx;
+
+uniform vec4 BackgroundColor : hint_color;
+uniform vec4 ForegroundColor : hint_color;
+uniform float LevelDepth;
+
+
+
+void vertex() {
+// Input:3
+	mat4 n_out3p0 = WORLD_MATRIX;
+
+// Input:2
+	vec3 n_out2p0 = VERTEX;
+
+// TransformVectorMult:4
+	vec3 n_out4p0 = (n_out3p0 * vec4(n_out2p0, 1.0)).xyz;
+
+// VectorOp:5
+	vec3 n_out5p0 = n_out4p0 - n_out2p0;
+
+// Output:0
+	COLOR.rgb = n_out5p0;
+
+}
+
+void fragment() {
+// ColorUniform:6
+	vec3 n_out6p0 = BackgroundColor.rgb;
+	float n_out6p1 = BackgroundColor.a;
+
+// ColorUniform:5
+	vec3 n_out5p0 = ForegroundColor.rgb;
+	float n_out5p1 = ForegroundColor.a;
+
+// Input:3
+	vec3 n_out3p0 = COLOR.rgb;
+
+// VectorDecompose:4
+	float n_out4p0 = n_out3p0.x;
+	float n_out4p1 = n_out3p0.y;
+	float n_out4p2 = n_out3p0.z;
+
+// ScalarUniform:10
+	float n_out10p0 = LevelDepth;
+
+// ScalarOp:8
+	float n_out8p0 = n_out4p2 / n_out10p0;
+
+// ScalarOp:9
+	float n_in9p1 = 0.50000;
+	float n_out9p0 = n_out8p0 + n_in9p1;
+
+// VectorScalarMix:7
+	vec3 n_out7p0 = mix(n_out6p0, n_out5p0, n_out9p0);
+
+// Output:0
+	ALBEDO = n_out7p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -92.1792, -22.7088 )
+nodes/vertex/0/position = Vector2( 1000, 100 )
+nodes/vertex/2/node = SubResource( 6 )
+nodes/vertex/2/position = Vector2( 60, 240 )
+nodes/vertex/3/node = SubResource( 7 )
+nodes/vertex/3/position = Vector2( 60, 140 )
+nodes/vertex/4/node = SubResource( 8 )
+nodes/vertex/4/position = Vector2( 280, 100 )
+nodes/vertex/5/node = SubResource( 13 )
+nodes/vertex/5/position = Vector2( 640, 160 )
+nodes/vertex/connections = PoolIntArray( 3, 0, 4, 0, 2, 0, 4, 1, 4, 0, 5, 0, 2, 0, 5, 1, 5, 0, 0, 6 )
+nodes/fragment/0/position = Vector2( 820, -160 )
+nodes/fragment/3/node = SubResource( 1 )
+nodes/fragment/3/position = Vector2( -80, 80 )
+nodes/fragment/4/node = SubResource( 2 )
+nodes/fragment/4/position = Vector2( -40, 140 )
+nodes/fragment/5/node = SubResource( 3 )
+nodes/fragment/5/position = Vector2( -20, -100 )
+nodes/fragment/6/node = SubResource( 4 )
+nodes/fragment/6/position = Vector2( -60, -180 )
+nodes/fragment/7/node = SubResource( 5 )
+nodes/fragment/7/position = Vector2( 560, -180 )
+nodes/fragment/8/node = SubResource( 11 )
+nodes/fragment/8/position = Vector2( 320, -20 )
+nodes/fragment/9/node = SubResource( 12 )
+nodes/fragment/9/position = Vector2( 520, -40 )
+nodes/fragment/10/node = SubResource( 10 )
+nodes/fragment/10/position = Vector2( 160, 260 )
+nodes/fragment/connections = PoolIntArray( 3, 0, 4, 0, 7, 0, 0, 0, 5, 0, 7, 1, 6, 0, 7, 0, 4, 2, 8, 0, 8, 0, 9, 0, 9, 0, 7, 2, 10, 0, 8, 1 )
+
+[resource]
+shader = SubResource( 9 )
+shader_param/BackgroundColor = Color( 0, 0.160784, 1, 1 )
+shader_param/ForegroundColor = Color( 1, 0, 0, 1 )
+shader_param/LevelDepth = 22.0
