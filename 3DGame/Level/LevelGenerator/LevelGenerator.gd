@@ -20,6 +20,8 @@ export(Color) var background_color: Color setget set_back_color
 export(int) var rng_seed = 12345 setget set_seed
 
 var map_coords_array := []
+var obstacle_map := []
+var map_center: Coord
 
 class Coord:
 	var x: int
@@ -32,6 +34,9 @@ class Coord:
 	func _to_string():
 		# (x, z)
 		return "(" + str(x) + ", " + str(z) + ")"
+		
+	func equals(coord):
+		return coord.x == self.x and coord.z == self.z
 
 func _ready():
 	generate_map()
@@ -58,11 +63,16 @@ func set_seed(var new_val):
 	
 func set_width(var new_val):
 	map_width = make_odd(new_val, map_width)
+	update_map_center()
 	generate_map()
 	
 func set_depth(var new_val):
 	map_depth = make_odd(new_val, map_depth)
+	update_map_center()
 	generate_map()
+	
+func update_map_center():
+	map_center = Coord.new(map_width/2, map_depth/2)
 	
 func set_obstacle_density(new_val):
 	obstacle_density = new_val
@@ -82,6 +92,14 @@ func fill_map_coords_array():
 	for x in range(map_width):
 		for z in range(map_depth):
 			map_coords_array.append(Coord.new(x, z))
+			
+func fill_obstacle_map():
+	obstacle_map = []
+	for x in range(map_width):
+		obstacle_map.append([])
+		for z in range(map_depth):
+			obstacle_map[x].append(false)
+#	print(obstacle_map)
 	
 func generate_map():
 	print("Bleep bloop generating map...")
@@ -110,17 +128,64 @@ func update_obstacle_material():
 	
 func add_obstacles():
 	fill_map_coords_array()
+	fill_obstacle_map()
 #	print(map_coords_array)
 	seed(rng_seed)
 	map_coords_array.shuffle()
 #	print(map_coords_array)
 	
 	var num_obstacles: int = map_coords_array.size() * obstacle_density
+	var current_obstacle_count = 0
 	
 	if num_obstacles > 0:
 		for coord in map_coords_array.slice(0, num_obstacles - 1):
-			create_obstacle_at(coord.x, coord.z)
+			if not map_center.equals(coord):
+#				create_obstacle_at(coord.x, coord.z)
+				current_obstacle_count += 1
+				obstacle_map[coord.x][coord.z] = true
+				if map_is_fully_accessible(current_obstacle_count):
+					create_obstacle_at(coord.x, coord.z)
+				else:
+					current_obstacle_count -= 1
+					obstacle_map[coord.x][coord.z] = false
 
+func map_is_fully_accessible(current_obstacle_count):
+	#Flood fill
+	var we_already_checked_here = []
+	for x in range(map_width):
+		we_already_checked_here.append([])
+		for z in range(map_depth):
+			we_already_checked_here[x].append(false)
+	
+	var coords_to_check = [map_center]
+	we_already_checked_here[map_center.x][map_center.z] = true
+	var accessible_tile_count = 1
+	
+	while coords_to_check:
+		var current_tile: Coord = coords_to_check.pop_front()
+		for x in [-1, 0, 1]:
+			for z in [-1, 0, 1]:
+				if x == 0 or z == 0:  # non-diagonal neighbor
+					var neighbor = Coord.new(current_tile.x + x, current_tile.z + z)
+					# Make sure we don't go off map
+					if on_the_map(neighbor):
+						if not we_already_checked_here[neighbor.x][neighbor.z]:
+							if not obstacle_map[neighbor.x][neighbor.z]:
+								we_already_checked_here[neighbor.x][neighbor.z] = true
+								coords_to_check.append(neighbor)
+								accessible_tile_count += 1
+
+	var target_accessible_tile_count = map_width * map_depth - current_obstacle_count
+	if target_accessible_tile_count == accessible_tile_count:
+		print ("Good location!")
+		return true
+	else:
+		print("Bad location! Cuts off a part of the map")
+		return false
+	
+
+func on_the_map(neighbor):
+	return neighbor.x >= 0 and neighbor.x < map_width and neighbor.z >= 0 and neighbor.z < map_depth
 
 func create_obstacle_at(x, z):
 	var obstacle_position = Vector3(x * 2, 0, z * 2)
