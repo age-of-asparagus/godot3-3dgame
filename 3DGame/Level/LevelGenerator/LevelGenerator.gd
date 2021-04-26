@@ -177,10 +177,8 @@ func map_is_fully_accessible(current_obstacle_count):
 
 	var target_accessible_tile_count = map_width * map_depth - current_obstacle_count
 	if target_accessible_tile_count == accessible_tile_count:
-		print ("Good location!")
 		return true
 	else:
-		print("Bad location! Cuts off a part of the map")
 		return false
 	
 
