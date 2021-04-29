@@ -19,9 +19,13 @@ export(Color) var background_color: Color setget set_back_color
 
 export(int) var rng_seed = 12345 setget set_seed
 
+export(bool) var generate_level = false setget set_generate_level
+
 var map_coords_array := []
 var obstacle_map := []
 var map_center: Coord
+
+var level: Spatial
 
 class Coord:
 	var x: int
@@ -39,44 +43,39 @@ class Coord:
 		return coord.x == self.x and coord.z == self.z
 
 func _ready():
+	pass
+	
+func set_generate_level(new_val):
 	generate_map()
 	
 func set_back_color(new_val):
 	background_color = new_val
-	generate_map()
 	
 func set_fore_color(new_val):
 	foreground_color = new_val
-	generate_map()
 
 func set_max_obs_height(new_val):
 	obstacle_max_height = max(new_val, obstacle_min_height)
-	generate_map()
 
 func set_min_obs_height(new_val):
 	obstacle_min_height = min(new_val, obstacle_max_height)
-	generate_map()
 	
 func set_seed(var new_val):
 	rng_seed = new_val
-	generate_map()
 	
 func set_width(var new_val):
 	map_width = make_odd(new_val, map_width)
 	update_map_center()
-	generate_map()
 	
 func set_depth(var new_val):
 	map_depth = make_odd(new_val, map_depth)
 	update_map_center()
-	generate_map()
 	
 func update_map_center():
 	map_center = Coord.new(map_width/2, map_depth/2)
 	
 func set_obstacle_density(new_val):
 	obstacle_density = new_val
-	generate_map()
 	
 func make_odd(new_int, old_int):
 	if new_int % 2 == 0: # it's even
@@ -105,6 +104,7 @@ func generate_map():
 	print("Bleep bloop generating map...")
 	
 	clear_map()
+	add_level()
 	add_ground()
 	update_obstacle_material()
 	add_obstacles()
@@ -113,11 +113,18 @@ func clear_map():
 	for node in get_children():
 		node.queue_free()
 		
+func add_level():
+	level = Spatial.new()
+	level.name = "Level"
+	add_child(level)
+	level.owner = self
+		
 func add_ground():
 	var ground: CSGBox = GroundScene.instance()
 	ground.width = map_width * 2
 	ground.depth = map_depth * 2 
-	add_child(ground)
+	level.add_child(ground)
+	ground.owner = self
 	
 func update_obstacle_material():
 	var temp_obstacle: CSGBox = ObstacleScene.instance()
@@ -197,7 +204,8 @@ func create_obstacle_at(x, z):
 #	new_obstacle.material = new_material
 	
 	new_obstacle.transform.origin = obstacle_position + Vector3(0, new_obstacle.height/2, 0)
-	add_child(new_obstacle)
+	level.add_child(new_obstacle)
+	new_obstacle.owner = self
 
 func get_obstacle_height():
 	return rand_range(obstacle_min_height, obstacle_max_height)
