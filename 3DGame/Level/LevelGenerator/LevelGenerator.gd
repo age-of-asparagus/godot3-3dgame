@@ -21,6 +21,9 @@ export(int) var rng_seed = 12345 setget set_seed
 
 export(bool) var generate_level = false setget set_generate_level
 
+export(String) var level_name = "New Level"
+export(bool) var save_level = false setget set_save_level
+
 var map_coords_array := []
 var obstacle_map := []
 var map_center: Coord
@@ -47,6 +50,14 @@ func _ready():
 	
 func set_generate_level(new_val):
 	generate_map()
+	
+func set_save_level(new_val):
+	var packed_scene = PackedScene.new()
+	for child in level.get_children():
+		child.owner = level
+	packed_scene.pack(level)
+	var scene_resource_path = "res://Level/LevelGenerator/GeneratedLevels/%s.tscn" % level_name
+	ResourceSaver.save(scene_resource_path, packed_scene)
 	
 func set_back_color(new_val):
 	background_color = new_val
