@@ -1,25 +1,17 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
-[ext_resource path="res://Level/ObstacleMaterial.tres" type="Material" id=3]
-[ext_resource path="res://Level/LevelGenerator/Ground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Level/LevelGenerator/GeneratedLevels/Level1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Spawning/Spawner.gd" type="Script" id=6]
 [ext_resource path="res://Spawning/Wave.gd" type="Script" id=7]
-[ext_resource path="res://Level/LevelGenerator/Obstacle.tscn" type="PackedScene" id=8]
-
-[sub_resource type="NavigationMesh" id=1]
-vertices = PoolVector3Array( -9.5, 1.4, -3.8, -6.8, 1.4, -3.8, -6.8, 1.4, -5.3, 7.9, 1.4, -6.5, 7.9, 1.4, -3.5, 9.4, 1.4, -2.9, 9.4, 1.4, -9.5, -2, 1.4, -6.2, 2.5, 1.4, -6.5, 3.1, 1.4, -7.4, -0.199999, 1.4, -9.5, -9.5, 1.4, -9.5, -5.6, 1.4, -6.5, 6.7, 1.4, -7.7, 7.9, 1.4, -6.5, 9.4, 1.4, -9.5, -9.5, 1.4, -3.8, -6.8, 1.4, -5.3, -5.6, 1.4, -6.5, -9.5, 1.4, -9.5, -1.4, 1.4, -3.8, 2.5, 1.4, -3.8, 2.5, 1.4, -6.5, -2, 1.4, -6.2, 3.1, 1.4, -7.4, 6.7, 1.4, -7.7, 9.4, 1.4, -9.5, -0.199999, 1.4, -9.5, -6.8, 1.4, -2.6, -6.8, 1.4, -3.8, -9.5, 1.4, -3.8, 2.8, 1.4, 2.8, 4, 1.4, -0.200001, 2.5, 1.4, -1.4, -2, 1.4, -1.7, -5.6, 1.4, -1.4, -4.4, 1.4, 2.5, 2.5, 1.4, -1.4, 2.5, 1.4, -3.8, -1.4, 1.4, -3.8, -2, 1.4, -1.7, -5.6, 1.4, -1.4, -6.8, 1.4, -2.6, -9.5, 1.4, -3.8, -9.5, 1.4, 3.1, -5.3, 1.4, 3.1, -4.4, 1.4, 2.5, 9.4, 1.4, -2.9, 7.9, 1.4, -3.5, 7.9, 1.4, -1.4, 9.4, 1.4, -2.9, 7.9, 1.4, -1.4, 7.3, 1.4, -0.500001, 9.4, 1.4, 3.1, 4, 1.4, -0.200001, 2.8, 1.4, 2.8, 3.7, 1.4, 3.7, 7.3, 1.4, -0.500001, 4, 1.4, -0.200001, 3.7, 1.4, 3.7, 3.7, 1.4, 6.4, 9.4, 1.4, 9.4, 9.4, 1.4, 3.1, -5.6, 1.4, 6.4, -5.3, 1.4, 3.1, -9.5, 1.4, 3.1, -9.5, 1.4, 9.4, 3.7, 1.4, 6.4, 2.5, 1.4, 7.6, 9.4, 1.4, 9.4, -5, 1.4, 7.3, -5.6, 1.4, 6.4, -9.5, 1.4, 9.4, -5, 1.4, 7.3, -9.5, 1.4, 9.4, -0.199999, 1.4, 9.4, 2.5, 1.4, 7.6, 2.5, 1.4, 7.6, -0.199999, 1.4, 9.4, 9.4, 1.4, 9.4 )
-polygons = [ PoolIntArray( 2, 1, 0 ), PoolIntArray( 4, 3, 5 ), PoolIntArray( 5, 3, 6 ), PoolIntArray( 9, 8, 10 ), PoolIntArray( 10, 8, 7 ), PoolIntArray( 10, 7, 12 ), PoolIntArray( 10, 12, 11 ), PoolIntArray( 15, 14, 13 ), PoolIntArray( 17, 16, 18 ), PoolIntArray( 18, 16, 19 ), PoolIntArray( 21, 20, 22 ), PoolIntArray( 22, 20, 23 ), PoolIntArray( 25, 24, 26 ), PoolIntArray( 26, 24, 27 ), PoolIntArray( 29, 28, 30 ), PoolIntArray( 32, 31, 33 ), PoolIntArray( 33, 31, 34 ), PoolIntArray( 34, 31, 36 ), PoolIntArray( 34, 36, 35 ), PoolIntArray( 38, 37, 39 ), PoolIntArray( 39, 37, 40 ), PoolIntArray( 42, 41, 43 ), PoolIntArray( 43, 41, 46 ), PoolIntArray( 43, 46, 45 ), PoolIntArray( 43, 45, 44 ), PoolIntArray( 49, 48, 47 ), PoolIntArray( 51, 50, 52 ), PoolIntArray( 52, 50, 53 ), PoolIntArray( 54, 56, 55 ), PoolIntArray( 58, 57, 59 ), PoolIntArray( 59, 57, 62 ), PoolIntArray( 59, 62, 60 ), PoolIntArray( 60, 62, 61 ), PoolIntArray( 64, 63, 65 ), PoolIntArray( 65, 63, 66 ), PoolIntArray( 67, 69, 68 ), PoolIntArray( 72, 71, 70 ), PoolIntArray( 76, 75, 73 ), PoolIntArray( 73, 75, 74 ), PoolIntArray( 79, 78, 77 ) ]
-cell/height = 0.85
-agent/radius = 1.5
 
 [node name="Level" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( -0.639962, 0, 0.768406, 0, 1, 0, -0.768406, 0, -0.639962, 10.0022, 1.42765, -7.17863 )
+transform = Transform( -0.639962, 0, 0.768406, 0, 1, 0, -0.768406, 0, -0.639962, 6.8022, 1.42765, -7.17863 )
 collision_layer = 2
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
@@ -29,27 +21,6 @@ shadow_contact = 0.5
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 18, 13 )
-
-[node name="Navigation" type="Navigation" parent="."]
-
-[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
-navmesh = SubResource( 1 )
-
-[node name="Ground" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 4 )]
-
-[node name="CSGBox" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 8 )]
-
-[node name="CSGBox3" type="CSGBox" parent="Navigation/NavigationMeshInstance"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.17369, 1, -4 )
-use_collision = true
-depth = 4.0
-material = ExtResource( 3 )
-
-[node name="CSGBox2" type="CSGBox" parent="Navigation/NavigationMeshInstance"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 5 )
-use_collision = true
-width = 6.0
-material = ExtResource( 3 )
 
 [node name="Spawner" type="Spatial" parent="."]
 script = ExtResource( 6 )
@@ -68,5 +39,5 @@ script = ExtResource( 7 )
 num_enemies = 20
 second_between_spawns = 0.2
 
-[node name="Enemy" parent="." instance=ExtResource( 5 )]
+[node name="Navigation" parent="." instance=ExtResource( 3 )]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_Timer_timeout"]

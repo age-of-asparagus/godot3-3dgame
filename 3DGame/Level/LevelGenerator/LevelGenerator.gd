@@ -28,7 +28,8 @@ var map_coords_array := []
 var obstacle_map := []
 var map_center: Coord
 
-var level: Spatial
+var level: Navigation
+var navmesh_instance: NavigationMeshInstance
 
 class Coord:
 	var x: int
@@ -53,7 +54,8 @@ func set_generate_level(new_val):
 	
 func set_save_level(new_val):
 	var packed_scene = PackedScene.new()
-	for child in level.get_children():
+	navmesh_instance.owner = level
+	for child in navmesh_instance.get_children():
 		child.owner = level
 	packed_scene.pack(level)
 	var scene_resource_path = "res://Level/LevelGenerator/GeneratedLevels/%s.tscn" % level_name
@@ -125,16 +127,24 @@ func clear_map():
 		node.queue_free()
 		
 func add_level():
-	level = Spatial.new()
-	level.name = "Level"
+	level = Navigation.new()
+	level.name = "Navigation"
 	add_child(level)
 	level.owner = self
+	
+	# Add navmesh
+	navmesh_instance = NavigationMeshInstance.new()
+	level.add_child(navmesh_instance)
+	navmesh_instance.owner = self
+	
+	# navmesh instance
+	navmesh_instance.navmesh = NavigationMesh.new()
 		
 func add_ground():
 	var ground: CSGBox = GroundScene.instance()
 	ground.width = map_width * 2
 	ground.depth = map_depth * 2 
-	level.add_child(ground)
+	navmesh_instance.add_child(ground)
 	ground.owner = self
 	
 func update_obstacle_material():
@@ -215,7 +225,7 @@ func create_obstacle_at(x, z):
 #	new_obstacle.material = new_material
 	
 	new_obstacle.transform.origin = obstacle_position + Vector3(0, new_obstacle.height/2, 0)
-	level.add_child(new_obstacle)
+	navmesh_instance.add_child(new_obstacle)
 	new_obstacle.owner = self
 
 func get_obstacle_height():
