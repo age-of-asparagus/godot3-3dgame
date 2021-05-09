@@ -1,0 +1,263 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Level/LevelGenerator/Ground.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Level/LevelGrid.tres" type="Material" id=2]
+[ext_resource path="res://Level/LevelGenerator/Obstacle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Level/LevelGenerator/FGShaderMaterial.tres" type="Material" id=4]
+
+[sub_resource type="NavigationMesh" id=1]
+vertices = PoolVector3Array( -8.6, 0.4, 4.2, -8.3, 0.4, 3.9, -9.8, 0.4, 3.6, -10.4, 0.4, 4.2, -7.7, 0.4, -2.4, -7.7, 0.4, -5.4, -8.3, 0.4, -5.4, -8.3, 0.4, -2.4, -4.4, 0.4, -5.7, -4.1, 0.4, -4.2, -3.8, 0.4, -4.5, -3.8, 0.4, -6.3, -10.4, 0.4, -14.4, -10.4, 0.4, -11.7, -8.3, 0.4, -11.4, -7.7, 0.4, -11.4, -1.7, 0.4, -13.5, 0.1, 0.4, -14.4, -1.7, 0.4, -13.5, 0.1, 0.4, -13.8, 0.1, 0.4, -14.4, -4.4, 0.4, -5.7, -3.8, 0.4, -6.3, -7.7, 0.4, -6.6, -7.7, 0.4, -5.4, -7.7, 0.4, -6.6, -8.3, 0.4, -8.4, -10.4, 0.4, -8.1, -10.4, 0.4, -5.7, -8.3, 0.4, -5.4, -7.7, 0.4, -5.4, -7.7, 0.4, -11.4, -1.7, 0.4, -11.7, -1.7, 0.4, -13.5, -8.3, 0.4, -2.4, -10.4, 0.4, -2.1, -9.8, 0.4, 0.6, -5, 0.4, 0.3, -5, 0.4, -2.1, -7.7, 0.4, -2.4, -10.4, 0.4, 4.2, -9.8, 0.4, 3.6, -9.8, 0.4, 0.6, -10.4, 0.4, -2.1, -8.3, 0.4, -8.4, -7.7, 0.4, -6.6, -7.7, 0.4, -11.4, -8.3, 0.4, -11.4, 7.6, 0.4, -11.7, 7.9, 0.4, -10.8, 8.2, 0.4, -10.8, 8.2, 0.4, -13.5, 4.3, 0.4, -11.4, 7.6, 0.4, -11.7, 8.2, 0.4, -13.5, 1.9, 0.4, -13.5, 0.1, 0.4, -14.4, 0.1, 0.4, -13.8, 1.9, 0.4, -13.5, 8.2, 0.4, -13.5, 10.3, 0.4, -13.8, 10.3, 0.4, -14.4, 1.9, 0.4, -13.5, 1.9, 0.4, -10.5, 4.3, 0.4, -11.4, 1.9, 0.4, -5.7, 3.7, 0.4, -5.4, 4.6, 0.4, -6.3, 4.3, 0.4, -11.4, 1.9, 0.4, -10.5, 1.6, 0.4, -7.8, -0.2, 0.4, -10.2, -0.2, 0.4, -7.8, 1.6, 0.4, -7.8, 1.9, 0.4, -10.5, 8.5, 0.4, -10.2, 8.2, 0.4, -10.8, 7.9, 0.4, -10.8, 7.9, 0.4, -6.6, 9.4, 0.4, 0.3, 9.7, 0.4, 2.4, 10.3, 0.4, 2.4, 10.3, 0.4, -0.299999, 10.3, 0.4, -3.6, 10.3, 0.4, -10.2, 8.5, 0.4, -10.2, 7.9, 0.4, -6.6, 8.2, 0.4, -3.3, 9.4, 0.4, 0.3, 10.3, 0.4, -0.299999, 8.2, 0.4, -0.599999, 5.8, 0.4, 0.3, 5.8, 0.4, -3.3, 5.8, 0.4, 0.3, 8.2, 0.4, -0.599999, 8.2, 0.4, -3.3, 4.6, 0.4, -6.3, 3.7, 0.4, -5.4, 3.7, 0.4, -3.6, 5.8, 0.4, -3.3, 8.2, 0.4, -3.3, 7.9, 0.4, -6.6, -6.5, 1.6, -7.5, -5.6, 1.6, -7.5, -5.6, 2.2, -9, -6.5, 2.2, -10.5, -6.5, 2.2, -9, -2.9, 2.6, -7.5, -2.6, 2.6, -5.4, -1.4, 2.6, -5.4, -1.4, 2.4, -10.5, -4.4, 2.6, -9, -4.4, 2.6, -7.5, -2.9, 2.6, -7.5, -1.4, 2.4, -10.5, -6.5, 2.2, -10.5, -5.6, 2.2, -9, -4.4, 2.6, -9, -1.4, 2.4, -10.5, -3.8, 0.4, -4.5, -4.1, 0.4, -4.2, -4.1, 0.4, -2.7, -1.4, 0.4, -2.1, -1.7, 0.4, -4.2, 0.400001, 0.4, -1.5, 2.2, 0.4, -2.1, -1.4, 0.4, -2.1, 5.8, 0.4, 13.5, 4, 0.4, 13.8, 4, 0.4, 14.4, 10.3, 0.4, 14.4, 5.2, 0.4, 7.8, 5.2, 0.4, 10.2, 5.8, 0.4, 10.5, 8.2, 0.4, 9.6, 7.9, 0.4, 7.5, 0.400001, 0.4, 1.5, 0.400001, 0.4, -1.5, -1.4, 0.4, -2.1, -4.1, 0.4, 0.6, -4.1, 0.4, 3, -1.7, 0.4, 4.5, 3.4, 0.4, 4.2, 4.3, 0.4, 4.5, 7.6, 0.4, 4.2, -5, 0.4, -2.1, -5, 0.4, 0.3, -4.1, 0.4, 0.6, -1.4, 0.4, -2.1, -4.1, 0.4, -2.7, 3.7, 0.4, 7.5, 4.3, 0.4, 7.5, 4.3, 0.4, 4.5, 3.4, 0.4, 4.2, 10.3, 0.4, 9.9, 8.2, 0.4, 9.6, 5.8, 0.4, 10.5, 5.8, 0.4, 13.5, 10.3, 0.4, 14.4, 2.5, 0.4, 3.9, 2.2, 0.4, 1.8, 0.400001, 0.4, 1.5, -1.7, 0.4, 4.5, 8.2, 0.4, 3.9, 2.5, 0.4, 3.9, 3.4, 0.4, 4.2, 7.6, 0.4, 4.2, 8.2, 0.4, 3.9, 7.6, 0.4, 4.2, 7.9, 0.4, 7.5, 8.2, 0.4, 9.6, 2.5, 0.4, 3.9, -1.7, 0.4, 4.5, 3.4, 0.4, 4.2, 8.5, 2, 2.4, 8.5, 2, 1.5, 4.9, 1.6, 1.5, 3.7, 1.6, 2.7, 6.9, 1.6, 2.5, 3.4, 2.4, -2.4, 3.7, 1.6, 2.7, 4.9, 1.6, 1.5, 4.6, 2.4, -2.4, 3.6, 2.4, 1, 4.8, 2.4, 0.200001, -0.2, 0.4, 8.4, 0.1, 0.4, 7.8, -1.7, 0.4, 7.5, -5.3, 0.4, 8.4, -7.7, 0.4, 14.4, -7.7, 0.4, 13.8, -9.8, 0.4, 13.5, -10.4, 0.4, 14.4, -5.3, 0.4, 8.4, -8.3, 0.4, 7.5, -10.4, 0.4, 7.8, -9.5, 0.4, 10.2, -6.2, 0.4, 10.5, -5.6, 0.4, 10.5, -5.3, 0.4, 8.4, -1.7, 0.4, 7.5, -1.7, 0.4, 4.5, -4.7, 0.4, 3.9, -8.3, 0.4, 3.9, -8.3, 0.4, 7.5, -1.7, 0.4, 4.5, -4.1, 0.4, 3, -4.7, 0.4, 3.9, -8.3, 0.4, 3.9, -8.6, 0.4, 4.2, -8.3, 0.4, 7.5, -10.4, 0.4, 14.4, -9.8, 0.4, 13.5, -9.5, 0.4, 10.2, -10.4, 0.4, 7.8, -4.4, 0.4, 12.3, -4.1, 0.4, 14.4, -3.5, 0.4, 12.3, -5.3, 0.4, 11.7, -5.6, 0.4, 10.5, -6.2, 0.4, 10.5, -6.2, 0.4, 12.3, 1.6, 0.4, 11.7, 2.2, 0.4, 13.5, 2.2, 0.4, 10.5, 1.9, 0.4, 8.7, -5.3, 0.4, 11.7, -6.2, 0.4, 12.3, -4.4, 0.4, 12.3, 5.2, 0.4, 7.8, 4.3, 0.4, 7.5, 3.7, 0.4, 7.5, 1.9, 0.4, 8.7, 2.2, 0.4, 10.5, 5.2, 0.4, 10.2, -5.3, 0.4, 11.7, -4.4, 0.4, 12.3, -3.5, 0.4, 12.3, 0.1, 0.4, 7.8, -0.2, 0.4, 8.4, 1.9, 0.4, 8.7, 3.7, 0.4, 7.5, 4, 0.4, 14.4, 4, 0.4, 13.8, 2.2, 0.4, 13.5, -0.2, 0.4, 14.4, -0.5, 0.4, 12.3, -0.2, 0.4, 14.4, 2.2, 0.4, 13.5, 1.6, 0.4, 11.7, -5.3, 0.4, 11.7, -3.5, 0.4, 12.3, -0.5, 0.4, 12.3, 1.6, 0.4, 11.7 )
+polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 3 ), PoolIntArray( 7, 6, 4 ), PoolIntArray( 4, 6, 5 ), PoolIntArray( 9, 8, 10 ), PoolIntArray( 10, 8, 11 ), PoolIntArray( 14, 13, 15 ), PoolIntArray( 15, 13, 12 ), PoolIntArray( 15, 12, 16 ), PoolIntArray( 16, 12, 17 ), PoolIntArray( 18, 20, 19 ), PoolIntArray( 24, 23, 21 ), PoolIntArray( 21, 23, 22 ), PoolIntArray( 30, 29, 25 ), PoolIntArray( 25, 29, 26 ), PoolIntArray( 26, 29, 28 ), PoolIntArray( 26, 28, 27 ), PoolIntArray( 33, 32, 31 ), PoolIntArray( 34, 39, 35 ), PoolIntArray( 35, 39, 36 ), PoolIntArray( 36, 39, 38 ), PoolIntArray( 36, 38, 37 ), PoolIntArray( 41, 40, 42 ), PoolIntArray( 42, 40, 43 ), PoolIntArray( 47, 46, 44 ), PoolIntArray( 44, 46, 45 ), PoolIntArray( 49, 48, 50 ), PoolIntArray( 50, 48, 51 ), PoolIntArray( 53, 52, 54 ), PoolIntArray( 54, 52, 55 ), PoolIntArray( 57, 56, 58 ), PoolIntArray( 58, 56, 59 ), PoolIntArray( 59, 56, 60 ), PoolIntArray( 60, 56, 61 ), PoolIntArray( 64, 63, 62 ), PoolIntArray( 66, 65, 67 ), PoolIntArray( 67, 65, 70 ), PoolIntArray( 67, 70, 69 ), PoolIntArray( 67, 69, 68 ), PoolIntArray( 72, 71, 73 ), PoolIntArray( 73, 71, 74 ), PoolIntArray( 76, 75, 77 ), PoolIntArray( 77, 75, 78 ), PoolIntArray( 80, 79, 81 ), PoolIntArray( 81, 79, 82 ), PoolIntArray( 87, 86, 83 ), PoolIntArray( 83, 86, 85 ), PoolIntArray( 83, 85, 84 ), PoolIntArray( 89, 88, 90 ), PoolIntArray( 90, 88, 91 ), PoolIntArray( 95, 94, 92 ), PoolIntArray( 92, 94, 93 ), PoolIntArray( 97, 96, 98 ), PoolIntArray( 98, 96, 99 ), PoolIntArray( 99, 96, 100 ), PoolIntArray( 100, 96, 101 ), PoolIntArray( 105, 104, 106 ), PoolIntArray( 106, 104, 103 ), PoolIntArray( 106, 103, 102 ), PoolIntArray( 108, 107, 109 ), PoolIntArray( 109, 107, 110 ), PoolIntArray( 112, 111, 113 ), PoolIntArray( 113, 111, 114 ), PoolIntArray( 116, 115, 117 ), PoolIntArray( 117, 115, 118 ), PoolIntArray( 120, 119, 121 ), PoolIntArray( 121, 119, 123 ), PoolIntArray( 121, 123, 122 ), PoolIntArray( 126, 125, 124 ), PoolIntArray( 128, 127, 129 ), PoolIntArray( 129, 127, 130 ), PoolIntArray( 132, 131, 133 ), PoolIntArray( 133, 131, 134 ), PoolIntArray( 134, 131, 135 ), PoolIntArray( 137, 136, 138 ), PoolIntArray( 138, 136, 139 ), PoolIntArray( 139, 136, 140 ), PoolIntArray( 140, 136, 141 ), PoolIntArray( 144, 143, 142 ), PoolIntArray( 146, 145, 147 ), PoolIntArray( 147, 145, 149 ), PoolIntArray( 147, 149, 148 ), PoolIntArray( 151, 150, 152 ), PoolIntArray( 152, 150, 153 ), PoolIntArray( 155, 154, 156 ), PoolIntArray( 156, 154, 157 ), PoolIntArray( 157, 154, 158 ), PoolIntArray( 160, 159, 161 ), PoolIntArray( 161, 159, 162 ), PoolIntArray( 166, 165, 163 ), PoolIntArray( 163, 165, 164 ), PoolIntArray( 168, 167, 169 ), PoolIntArray( 169, 167, 170 ), PoolIntArray( 173, 172, 171 ), PoolIntArray( 174, 178, 175 ), PoolIntArray( 175, 178, 176 ), PoolIntArray( 176, 178, 177 ), PoolIntArray( 180, 183, 181 ), PoolIntArray( 181, 183, 184 ), PoolIntArray( 184, 183, 182 ), PoolIntArray( 182, 183, 179 ), PoolIntArray( 186, 185, 187 ), PoolIntArray( 187, 185, 188 ), PoolIntArray( 190, 189, 191 ), PoolIntArray( 191, 189, 192 ), PoolIntArray( 198, 197, 193 ), PoolIntArray( 193, 197, 194 ), PoolIntArray( 194, 197, 196 ), PoolIntArray( 194, 196, 195 ), PoolIntArray( 201, 200, 202 ), PoolIntArray( 202, 200, 199 ), PoolIntArray( 202, 199, 204 ), PoolIntArray( 202, 204, 203 ), PoolIntArray( 205, 207, 206 ), PoolIntArray( 210, 209, 208 ), PoolIntArray( 212, 211, 213 ), PoolIntArray( 213, 211, 214 ), PoolIntArray( 217, 216, 215 ), PoolIntArray( 219, 218, 220 ), PoolIntArray( 220, 218, 221 ), PoolIntArray( 225, 224, 222 ), PoolIntArray( 222, 224, 223 ), PoolIntArray( 228, 227, 226 ), PoolIntArray( 230, 229, 231 ), PoolIntArray( 231, 229, 234 ), PoolIntArray( 231, 234, 232 ), PoolIntArray( 232, 234, 233 ), PoolIntArray( 237, 236, 235 ), PoolIntArray( 239, 238, 240 ), PoolIntArray( 240, 238, 241 ), PoolIntArray( 243, 242, 244 ), PoolIntArray( 244, 242, 245 ), PoolIntArray( 249, 248, 246 ), PoolIntArray( 246, 248, 247 ), PoolIntArray( 251, 250, 252 ), PoolIntArray( 252, 250, 253 ) ]
+
+[node name="Navigation" type="Navigation"]
+
+[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="."]
+navmesh = SubResource( 1 )
+
+[node name="Ground" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+use_collision = true
+collision_layer = 9
+width = 22.0
+depth = 30.0
+material = ExtResource( 2 )
+
+[node name="CSGBox" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.895181, 6 )
+use_collision = true
+height = 1.79036
+material = ExtResource( 4 )
+
+[node name="CSGBox2" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.09254, -10 )
+use_collision = true
+height = 2.18509
+material = ExtResource( 4 )
+
+[node name="CSGBox3" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.952933, -8 )
+use_collision = true
+height = 1.90587
+material = ExtResource( 4 )
+
+[node name="CSGBox4" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.965887, -10 )
+use_collision = true
+height = 1.93177
+material = ExtResource( 4 )
+
+[node name="CSGBox5" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.13533, -4 )
+use_collision = true
+height = 2.27067
+material = ExtResource( 4 )
+
+[node name="CSGBox6" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.646841, -10 )
+use_collision = true
+height = 1.29368
+material = ExtResource( 4 )
+
+[node name="CSGBox7" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.530582, 14 )
+use_collision = true
+height = 1.06116
+material = ExtResource( 4 )
+
+[node name="CSGBox8" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.540447, 6 )
+use_collision = true
+height = 1.08089
+material = ExtResource( 4 )
+
+[node name="CSGBox9" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.827835, 8 )
+use_collision = true
+height = 1.65567
+material = ExtResource( 4 )
+
+[node name="CSGBox10" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.77463, -10 )
+use_collision = true
+height = 1.54926
+material = ExtResource( 4 )
+
+[node name="CSGBox11" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.541819, 6 )
+use_collision = true
+height = 1.08364
+material = ExtResource( 4 )
+
+[node name="CSGBox12" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.02517, 0 )
+use_collision = true
+height = 2.05035
+material = ExtResource( 4 )
+
+[node name="CSGBox13" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.06016, 14 )
+use_collision = true
+height = 2.12033
+material = ExtResource( 4 )
+
+[node name="CSGBox14" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.754107, 2 )
+use_collision = true
+height = 1.50821
+material = ExtResource( 4 )
+
+[node name="CSGBox15" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.506305, 4 )
+use_collision = true
+height = 1.01261
+material = ExtResource( 4 )
+
+[node name="CSGBox16" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.743355, -12 )
+use_collision = true
+height = 1.48671
+material = ExtResource( 4 )
+
+[node name="CSGBox17" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.758996, 10 )
+use_collision = true
+height = 1.51799
+material = ExtResource( 4 )
+
+[node name="CSGBox18" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.1207, -6 )
+use_collision = true
+height = 2.2414
+material = ExtResource( 4 )
+
+[node name="CSGBox19" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.06275, 12 )
+use_collision = true
+height = 2.1255
+material = ExtResource( 4 )
+
+[node name="CSGBox20" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.605435, -8 )
+use_collision = true
+height = 1.21087
+material = ExtResource( 4 )
+
+[node name="CSGBox21" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.964887, 12 )
+use_collision = true
+height = 1.92977
+material = ExtResource( 4 )
+
+[node name="CSGBox22" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.04871, 6 )
+use_collision = true
+height = 2.09742
+material = ExtResource( 4 )
+
+[node name="CSGBox23" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.876097, -10 )
+use_collision = true
+height = 1.75219
+material = ExtResource( 4 )
+
+[node name="CSGBox24" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.683596, 2 )
+use_collision = true
+height = 1.36719
+material = ExtResource( 4 )
+
+[node name="CSGBox25" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.615558, 2 )
+use_collision = true
+height = 1.23112
+material = ExtResource( 4 )
+
+[node name="CSGBox26" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.20426, -8 )
+use_collision = true
+height = 2.40851
+material = ExtResource( 4 )
+
+[node name="CSGBox27" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.511033, -6 )
+use_collision = true
+height = 1.02207
+material = ExtResource( 4 )
+
+[node name="CSGBox28" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.534774, 0 )
+use_collision = true
+height = 1.06955
+material = ExtResource( 4 )
+
+[node name="CSGBox29" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.12196, -4 )
+use_collision = true
+height = 2.24392
+material = ExtResource( 4 )
+
+[node name="CSGBox30" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.84704, 2 )
+use_collision = true
+height = 1.69408
+material = ExtResource( 4 )
+
+[node name="CSGBox31" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.565106, 10 )
+use_collision = true
+height = 1.13021
+material = ExtResource( 4 )
+
+[node name="CSGBox32" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.1148, -4 )
+use_collision = true
+height = 2.22959
+material = ExtResource( 4 )
+
+[node name="CSGBox33" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.00939, -2 )
+use_collision = true
+height = 2.01878
+material = ExtResource( 4 )
+
+[node name="CSGBox34" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.19679, -8 )
+use_collision = true
+height = 2.39359
+material = ExtResource( 4 )
+
+[node name="CSGBox35" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.852662, -12 )
+use_collision = true
+height = 1.70532
+material = ExtResource( 4 )
+
+[node name="CSGBox36" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.687273, -2 )
+use_collision = true
+height = 1.37455
+material = ExtResource( 4 )
+
+[node name="CSGBox37" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.508738, 10 )
+use_collision = true
+height = 1.01748
+material = ExtResource( 4 )
+
+[node name="CSGBox38" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.19968, 6 )
+use_collision = true
+height = 2.39935
+material = ExtResource( 4 )
+
+[node name="CSGBox39" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.581081, -4 )
+use_collision = true
+height = 1.16216
+material = ExtResource( 4 )
+
+[node name="CSGBox40" type="CSGBox" parent="NavigationMeshInstance" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.08161, 2 )
+use_collision = true
+height = 2.16321
+material = ExtResource( 4 )

@@ -4,6 +4,8 @@ extends Spatial
 export var GroundScene: PackedScene
 export var ObstacleScene: PackedScene
 
+export var navmesh_template: NavigationMesh
+
 var shader_material : ShaderMaterial
 
 export(int, 1, 21) var map_width = 11 setget set_width
@@ -124,7 +126,7 @@ func generate_map():
 	
 func clear_map():
 	for node in get_children():
-		node.queue_free()
+		node.free()
 		
 func add_level():
 	level = Navigation.new()
@@ -138,7 +140,7 @@ func add_level():
 	navmesh_instance.owner = self
 	
 	# navmesh instance
-	navmesh_instance.navmesh = NavigationMesh.new()
+	navmesh_instance.navmesh = navmesh_template.duplicate()
 		
 func add_ground():
 	var ground: CSGBox = GroundScene.instance()

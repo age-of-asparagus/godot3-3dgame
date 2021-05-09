@@ -1,0 +1,5 @@
+[gd_resource type="NavigationMesh" format=2]
+
+[resource]
+vertices = PoolVector3Array( -0.2, 0.4, -10.4, -10.4, 0.4, -10.4, -10.4, 0.4, -0.2, -0.2, 0.4, 10.3, 10.3, 0.4, 10.3, 10.3, 0.4, -0.2, -10.4, 0.4, -0.2, -10.4, 0.4, 10.3, -0.2, 0.4, 10.3, 10.3, 0.4, -0.2, 10.3, 0.4, -10.4, -0.2, 0.4, -10.4 )
+polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 5 ), PoolIntArray( 2, 5, 3 ), PoolIntArray( 3, 5, 4 ), PoolIntArray( 8, 7, 6 ), PoolIntArray( 11, 10, 9 ) ]
