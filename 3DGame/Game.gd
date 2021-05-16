@@ -5,6 +5,12 @@ var ray_target = Vector3()
 
 onready var player = $Player
 onready var hand = $Player/Body/Hand
+onready var navmap = $Navigation
+
+func _ready():
+	print(navmap.map_depth)
+	print(navmap.map_width)
+	print(navmap.obstacle_map)
 
 func _physics_process(delta):
 	# "[Deleted Object]"
