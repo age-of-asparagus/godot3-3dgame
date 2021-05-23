@@ -69,7 +69,7 @@ func move_and_attack():
 				# Do damage to the player
 				var player_stats: Stats = player.get_node("Stats")
 				player_stats.take_hit(1)
-				print("I hit you: ", player_stats.current_HP, "/", player_stats.max_HP)
+#				print("I hit you: ", player_stats.current_HP, "/", player_stats.max_HP)
 				current_state = state.RETURNING
 				attack_target = return_target
 			state.RETURNING:

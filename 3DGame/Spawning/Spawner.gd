@@ -2,6 +2,7 @@ extends Spatial
 
 export(PackedScene) var Enemy
 onready var timer = $Timer
+onready var navmap = $"../Navigation"
 
 var enemies_remaining_to_spawn
 var enemies_killed_this_wave
@@ -36,6 +37,11 @@ func _on_Timer_timeout():
 	if enemies_remaining_to_spawn:
 		# SPAWN!
 		var enemy = Enemy.instance()
+		
+		# Give the enemy a random position, that is NOT in an obstacle
+		var location : Vector3 = navmap.get_random_empty_vec3()
+		enemy.translate(Vector3(location.x, 0, location.z))
+		
 		connect_to_enemy_signals(enemy)
 		var scene_root = get_parent()
 		scene_root.add_child(enemy)

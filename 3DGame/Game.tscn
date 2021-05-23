@@ -13,7 +13,7 @@ script = ExtResource( 2 )
 [node name="Navigation" parent="." instance=ExtResource( 3 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( -0.639962, 0, 0.768406, 0, 1, 0, -0.768406, 0, -0.639962, 6.8022, 1.42765, -7.17863 )
+transform = Transform( -0.639962, 0, 0.768406, 0, 1, 0, -0.768406, 0, -0.639962, 0, 1.5, 0 )
 collision_layer = 2
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
@@ -38,7 +38,7 @@ num_enemies = 2
 
 [node name="Wave2" type="Node" parent="Spawner/Waves"]
 script = ExtResource( 7 )
-num_enemies = 20
+num_enemies = 30
 second_between_spawns = 0.2
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_Timer_timeout"]
