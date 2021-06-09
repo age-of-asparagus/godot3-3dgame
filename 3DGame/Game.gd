@@ -1,18 +1,18 @@
 extends Spatial
 
+export(Array, PackedScene) var levels
+
 var ray_origin = Vector3()
 var ray_target = Vector3()
 
 onready var player = $Player
 onready var hand = $Player/Body/Hand
-onready var navmap = $Navigation
+
+var navmap: NavigationMap
+export var current_level = 0
 
 func _ready():
-	print(navmap.map_depth)
-	print(navmap.map_width)
-#	print(navmap.obstacle_map)
-#	print(navmap.map_coords_array)
-#	print(navmap.random_map_coords)
+	add_navmap()
 
 func _physics_process(delta):
 	# "[Deleted Object]"
@@ -36,3 +36,24 @@ func _physics_process(delta):
 			if distance_to_pointer.length() > 3:
 				hand.look_at(look_at_me, Vector3.UP )
 	
+	
+func add_navmap():
+	navmap = levels[current_level].instance()
+	add_child(navmap)
+	$Spawner.set_navmap(navmap)
+	
+func new_level():
+	current_level += 1
+	if current_level < levels.size():
+		navmap.queue_free()
+		add_navmap()
+		
+		# Move the player back to the middle
+		player.reset_position()
+		# Reset the spawner
+		$Spawner.reset()
+	else:
+		print("You win!")
+
+func _on_Spawner_level_complete():
+	new_level()

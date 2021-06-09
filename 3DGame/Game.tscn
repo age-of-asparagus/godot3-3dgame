@@ -1,19 +1,21 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
 [ext_resource path="res://Level/LevelGenerator/GeneratedLevels/NavMap1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Level/LevelGenerator/GeneratedLevels/NavMap3.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Spawning/Spawner.gd" type="Script" id=6]
 [ext_resource path="res://Spawning/Wave.gd" type="Script" id=7]
+[ext_resource path="res://Level/LevelGenerator/GeneratedLevels/NavMap2.tscn" type="PackedScene" id=8]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 50, 1, 50 )
 
 [node name="Game" type="Spatial"]
 script = ExtResource( 2 )
-
-[node name="Navigation" parent="." instance=ExtResource( 3 )]
+levels = [ ExtResource( 3 ), ExtResource( 8 ), ExtResource( 4 ) ]
+current_level = 2
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( -0.639962, 0, 0.768406, 0, 1, 0, -0.768406, 0, -0.639962, 0, 1.5, 0 )
@@ -37,12 +39,11 @@ Enemy = ExtResource( 5 )
 
 [node name="Wave" type="Node" parent="Spawner/Waves"]
 script = ExtResource( 7 )
-num_enemies = 2
+num_enemies = 1
 
 [node name="Wave2" type="Node" parent="Spawner/Waves"]
 script = ExtResource( 7 )
-num_enemies = 30
-second_between_spawns = 0.2
+second_between_spawns = 0.5
 
 [node name="Void" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0 )
@@ -50,5 +51,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0 )
 [node name="CollisionShape" type="CollisionShape" parent="Void"]
 shape = SubResource( 1 )
 
+[connection signal="level_complete" from="Spawner" to="." method="_on_Spawner_level_complete"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Void" to="Player" method="_on_Void_body_entered"]

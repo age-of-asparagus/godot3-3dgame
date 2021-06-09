@@ -2,7 +2,7 @@ extends KinematicBody
 
 class_name Enemy
 
-onready var nav = $"../Navigation" as Navigation
+var navmap: NavigationMap setget set_navmap
 onready var player = $"../Player" as KinematicBody
 
 onready var attack_timer = $AttackTimer
@@ -28,6 +28,8 @@ enum state {
 
 var current_state = state.SEEKING
 
+func set_navmap(new_navmap):
+	navmap = new_navmap
 
 func _ready():
 	$MeshInstance.set_surface_material(0, default_material)
@@ -84,7 +86,7 @@ func collide_with_other_enemies(should_we_collide):
 	set_collision_layer_bit(2, should_we_collide)
 	
 func update_path(target_position):
-	path = nav.get_simple_path(global_transform.origin, target_position)
+	path = navmap.get_simple_path(global_transform.origin, target_position)
 	
 
 func _on_Stats_you_died_signal():

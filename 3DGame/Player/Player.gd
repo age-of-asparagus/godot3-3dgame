@@ -39,6 +39,8 @@ func _physics_process(delta):
 	if Input.is_action_pressed("primary_action"):
 		gun_controller.shoot()
 
+func reset_position():
+	global_transform.origin = Vector3(0, 3, 0)
 
 func _on_Stats_you_died_signal():
 	print("GAME OVER")

@@ -41,6 +41,7 @@ shape = SubResource( 3 )
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
 [connection signal="timeout" from="PathUpdateTimer" to="." method="_on_PathUpdateTimer_timeout"]
 [connection signal="you_died_signal" from="Stats" to="." method="_on_Stats_you_died_signal"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
