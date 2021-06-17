@@ -47,4 +47,5 @@ StartingWeapon = ExtResource( 3 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
 shape = SubResource( 5 )
+
 [connection signal="you_died_signal" from="Stats" to="." method="_on_Stats_you_died_signal"]

@@ -37,7 +37,9 @@ func _physics_process(delta):
 	
 	# Shoot shoot
 	if Input.is_action_pressed("primary_action"):
-		gun_controller.shoot()
+		gun_controller.hold_trigger()
+	else:
+		gun_controller.release_trigger()
 
 func reset_position():
 	global_transform.origin = Vector3(0, 3, 0)

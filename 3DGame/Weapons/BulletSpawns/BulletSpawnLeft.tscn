@@ -1,0 +1,4 @@
+[gd_scene format=2]
+
+[node name="BulletSpawnLeft" type="Position3D"]
+transform = Transform( 0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, 0.1, 0, 0 )
