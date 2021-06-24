@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Spawning/Spawner.gd" type="Script" id=6]
 [ext_resource path="res://Spawning/Wave.gd" type="Script" id=7]
 [ext_resource path="res://Level/LevelGenerator/GeneratedLevels/NavMap2.tscn" type="PackedScene" id=8]
+[ext_resource path="res://game_env.tres" type="Environment" id=9]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 50, 1, 50 )
@@ -50,6 +51,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Void"]
 shape = SubResource( 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 9 )
 
 [connection signal="level_complete" from="Spawner" to="." method="_on_Spawner_level_complete"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_Timer_timeout"]

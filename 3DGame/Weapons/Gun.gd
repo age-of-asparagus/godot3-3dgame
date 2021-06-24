@@ -1,42 +1,49 @@
 extends Spatial
 class_name Gun
 
-export(PackedScene) var Bullet
-export(Array, PackedScene) var BulletSpawns
-
-onready var rof_timer = $Timer
-var can_shoot = true
-
-export var muzzle_speed = 30
-export var millis_between_shots = 100
-
 enum FireMode {
 	SINGLE,
 	BURST,
 	AUTO,
 }
+
+export(PackedScene) var Bullet
+export(Array, PackedScene) var BulletSpawns
+export var muzzle_speed = 30
+export var millis_between_shots = 100
 export(FireMode) var fire_mode = FireMode.AUTO
-var trigger_released = true
-
-# Burst
 export var burst_shots = 3
-var burst_shots_remaining
+export var mag_capacity = 13
 
+var bullets_in_mag
+var trigger_released = true
+var can_shoot = true
+var burst_shots_remaining
 var bullet_spawns = []
+
+onready var rof_timer = $Timer
 
 func _ready():
 	rof_timer.wait_time = millis_between_shots / 1000.0
 	reset_bursts()
+	reload()
 	init_bullet_spawns()
 	
 func init_bullet_spawns():
 	for Spawn in BulletSpawns:
 		var spawn = Spawn.instance()
-		$Muzzle.add_child(spawn)
-	bullet_spawns = $Muzzle.get_children()
+		$Mesh/Muzzle.add_child(spawn)
+	bullet_spawns = $Mesh/Muzzle.get_children()
 	
 func reset_bursts():
 	burst_shots_remaining = burst_shots
+	
+func reload():
+	# Animate relaoding
+	$AnimationPlayer.play("Reload")
+
+func refill_mag():
+	bullets_in_mag = mag_capacity
 	
 func hold_trigger():
 	match fire_mode:
@@ -58,7 +65,7 @@ func release_trigger():
 	reset_bursts()
 	
 func shoot():
-	if can_shoot:
+	if can_shoot and bullets_in_mag:
 		for spawn in bullet_spawns:
 			var new_bullet = Bullet.instance()
 			new_bullet.global_transform = spawn.global_transform
@@ -68,9 +75,13 @@ func shoot():
 #		print("pew!")
 		can_shoot = false
 		rof_timer.start()
+		bullets_in_mag -= 1
+		$AnimationPlayer.play("Recoil")
 		return true
-	else:
-		return false
+	elif not bullets_in_mag:
+		reload()
+		
+	return false
 
 
 func _on_Timer_timeout():
