@@ -40,6 +40,10 @@ func _physics_process(delta):
 		gun_controller.hold_trigger()
 	else:
 		gun_controller.release_trigger()
+		
+	# relaod
+	if Input.is_action_just_pressed("reload"):
+		gun_controller.reload()
 
 func reset_position():
 	global_transform.origin = Vector3(0, 3, 0)

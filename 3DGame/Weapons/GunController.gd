@@ -26,3 +26,7 @@ func hold_trigger():
 func release_trigger():
 	if equipped_weapon:
 		equipped_weapon.release_trigger()
+
+func reload():
+	if equipped_weapon:
+		equipped_weapon.reload()
