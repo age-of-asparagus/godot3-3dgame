@@ -23,6 +23,8 @@ var bullet_spawns = []
 
 onready var rof_timer = $Timer
 
+signal update_ammo
+
 func _ready():
 	rof_timer.wait_time = millis_between_shots / 1000.0
 	reset_bursts()
@@ -44,6 +46,7 @@ func reload():
 
 func refill_mag():
 	bullets_in_mag = mag_capacity
+	emit_signal("update_ammo", bullets_in_mag)
 	
 func hold_trigger():
 	match fire_mode:
@@ -76,6 +79,7 @@ func shoot():
 		can_shoot = false
 		rof_timer.start()
 		bullets_in_mag -= 1
+		emit_signal("update_ammo", bullets_in_mag)
 		$AnimationPlayer.play("Recoil")
 		return true
 	elif not bullets_in_mag:

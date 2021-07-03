@@ -12,6 +12,7 @@ var current_wave: Wave # Wave node
 var current_wave_number = -1
 
 signal level_complete
+signal wave_update
 
 func set_navmap(new_navmap):
 	navmap = new_navmap
@@ -19,12 +20,12 @@ func set_navmap(new_navmap):
 func _ready():
 	waves = $Waves.get_children()
 #	print("Waves: ", waves)
-	start_next_wave()
 	
 func start_next_wave():
 	enemies_killed_this_wave = 0
 	current_wave_number += 1
 	if current_wave_number < waves.size():
+		emit_signal("wave_update", current_wave_number)
 		current_wave = waves[current_wave_number]
 		enemies_remaining_to_spawn = current_wave.num_enemies
 		timer.wait_time = current_wave.second_between_spawns

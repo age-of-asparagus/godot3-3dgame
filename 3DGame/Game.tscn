@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Spawning/Wave.gd" type="Script" id=7]
 [ext_resource path="res://Level/LevelGenerator/GeneratedLevels/NavMap2.tscn" type="PackedScene" id=8]
 [ext_resource path="res://game_env.tres" type="Environment" id=9]
+[ext_resource path="res://HUD/hud_theme.tres" type="Theme" id=10]
+[ext_resource path="res://HUD/HUD.gd" type="Script" id=11]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 50, 1, 50 )
@@ -16,7 +18,6 @@ extents = Vector3( 50, 1, 50 )
 [node name="Game" type="Spatial"]
 script = ExtResource( 2 )
 levels = [ ExtResource( 3 ), ExtResource( 8 ), ExtResource( 4 ) ]
-current_level = 2
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( -0.639962, 0, 0.768406, 0, 1, 0, -0.768406, 0, -0.639962, 0, 1.5, 0 )
@@ -55,6 +56,114 @@ shape = SubResource( 1 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 9 )
 
+[node name="HUD" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+theme = ExtResource( 10 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="HUD"]
+margin_right = 40.0
+margin_bottom = 40.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelLabel" type="Label" parent="HUD/GridContainer"]
+margin_right = 91.0
+margin_bottom = 33.0
+text = "LEVEL: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelValue" type="Label" parent="HUD/GridContainer"]
+margin_left = 95.0
+margin_right = 112.0
+margin_bottom = 33.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WaveLabel" type="Label" parent="HUD/GridContainer"]
+margin_top = 37.0
+margin_right = 91.0
+margin_bottom = 70.0
+text = "WAVE: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WaveValue" type="Label" parent="HUD/GridContainer"]
+margin_left = 95.0
+margin_top = 37.0
+margin_right = 112.0
+margin_bottom = 70.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer2" type="GridContainer" parent="HUD"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -70.0
+margin_right = 112.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthLabel" type="Label" parent="HUD/GridContainer2"]
+margin_right = 114.0
+margin_bottom = 33.0
+text = "HEALTH: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthValue" type="Label" parent="HUD/GridContainer2"]
+margin_left = 118.0
+margin_right = 135.0
+margin_bottom = 33.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoLabel" type="Label" parent="HUD/GridContainer2"]
+margin_top = 37.0
+margin_right = 114.0
+margin_bottom = 70.0
+text = "AMMO: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoValue" type="Label" parent="HUD/GridContainer2"]
+margin_left = 118.0
+margin_top = 37.0
+margin_right = 135.0
+margin_bottom = 70.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="update_health" from="Player/Stats" to="HUD" method="_on_Stats_update_health"]
+[connection signal="ammo_update" from="Player/GunController" to="HUD" method="_on_GunController_ammo_update"]
 [connection signal="level_complete" from="Spawner" to="." method="_on_Spawner_level_complete"]
+[connection signal="wave_update" from="Spawner" to="HUD" method="_on_Spawner_wave_update"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Void" to="Player" method="_on_Void_body_entered"]
+
+[editable path="Player"]

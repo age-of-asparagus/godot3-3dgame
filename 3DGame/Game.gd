@@ -13,6 +13,10 @@ export var current_level = 0
 
 func _ready():
 	add_navmap()
+	$HUD.update_level(current_level)
+	$Spawner.start_next_wave()
+	# To force an update of the HUD
+	player.get_node("Stats").take_hit(0)
 
 func _physics_process(delta):
 	# "[Deleted Object]"
@@ -45,6 +49,7 @@ func add_navmap():
 func new_level():
 	current_level += 1
 	if current_level < levels.size():
+		$HUD.update_level(current_level)
 		navmap.queue_free()
 		add_navmap()
 		

@@ -8,6 +8,7 @@ onready var current_HP = max_HP
 var dead = false
 
 signal you_died_signal
+signal update_health
 
 func _ready():
 	pass
@@ -16,7 +17,7 @@ func _ready():
 func take_hit(damage):
 	
 	current_HP -= damage
-#	print("I'm hit!! ", current_HP,  "/", max_HP)
+	emit_signal("update_health", current_HP, max_HP)
 	
 	if current_HP <= 0 and not dead:
 		die()
