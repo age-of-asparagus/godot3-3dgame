@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Weapons/Gun.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Weapons/BulletSpawns/BulletSpawnCenter.tscn" type="PackedScene" id=2]
+
+[node name="Gun" instance=ExtResource( 1 )]
+gun_name = "Uzi"
+BulletSpawns = [ ExtResource( 2 ) ]
+mag_capacity = 10
+
+[node name="MeshInstance" parent="Mesh" index="0"]
+transform = Transform( 0.9, 0, 0, 0, 0.2187, 0, 0, 0, 0.2304, -0.3, 0, -1.31134e-08 )
+
+[node name="MeshInstance2" parent="Mesh" index="1"]
+transform = Transform( 4.86381e-16, -0.2187, -2.94976e-09, 0.359999, 0, 7.12135e-09, -1.11271e-08, -2.79996e-09, 0.2304, -0.647146, -0.50766, 8.74228e-09 )
+
+[node name="MeshInstance3" parent="Mesh" index="2"]
+visible = false
+
+[node name="Muzzle" parent="Mesh" index="3"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.60869, 0, -1.31134e-08 )

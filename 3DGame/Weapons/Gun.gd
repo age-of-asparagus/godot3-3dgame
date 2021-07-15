@@ -7,6 +7,7 @@ enum FireMode {
 	AUTO,
 }
 
+export var gun_name = "Gun"
 export(PackedScene) var Bullet
 export(Array, PackedScene) var BulletSpawns
 export var muzzle_speed = 30

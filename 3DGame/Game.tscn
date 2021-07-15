@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://game_env.tres" type="Environment" id=9]
 [ext_resource path="res://HUD/hud_theme.tres" type="Theme" id=10]
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=11]
+[ext_resource path="res://Weapons/Guns/50Cal.tscn" type="PackedScene" id=12]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 50, 1, 50 )
@@ -22,6 +23,9 @@ levels = [ ExtResource( 3 ), ExtResource( 8 ), ExtResource( 4 ) ]
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( -0.639962, 0, 0.768406, 0, 1, 0, -0.768406, 0, -0.639962, 0, 1.5, 0 )
 collision_layer = 2
+
+[node name="GunController" parent="Player" index="2"]
+StartingWeapon = ExtResource( 12 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.00540057, -0.937422, 0.348153, -0.632528, 0.266457, 0.727262, -0.774519, -0.224144, -0.591506, 9, 6, 0 )
