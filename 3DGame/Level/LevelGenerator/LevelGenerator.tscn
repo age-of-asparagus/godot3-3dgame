@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Level/LevelGenerator/LevelGenerator.gd" type="Script" id=1]
 [ext_resource path="res://Level/LevelGenerator/Ground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Level/LevelGenerator/Obstacle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Spawning/Wave.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Level/LevelGenerator/navmesh_template.tres" type="NavigationMesh" id=5]
 [ext_resource path="res://Level/LevelGenerator/NavigationMap.gd" type="Script" id=7]
 
@@ -11,17 +12,18 @@ script = ExtResource( 1 )
 GroundScene = ExtResource( 2 )
 ObstacleScene = ExtResource( 3 )
 navmesh_template = ExtResource( 5 )
+WaveScene = ExtResource( 4 )
 map_width = 13
 map_depth = 9
 obstacle_density = 0.25
 obstacle_max_height = 2.488
 foreground_color = Color( 0.933333, 0.0431373, 0.0431373, 1 )
 background_color = Color( 0.0156863, 0.0745098, 0.984314, 1 )
-rng_seed = 12532
-level_name = "NavMap4"
+rng_seed = 12565
+level_name = "NavMap3"
 
 [node name="Navigation" type="Navigation" parent="."]
 script = ExtResource( 7 )
-obstacle_map = [ [ true, false, true, false, false, false, false, false, true ], [ false, false, true, false, false, false, false, true, false ], [ false, false, false, false, false, false, false, false, false ], [ false, false, false, false, false, false, false, false, false ], [ true, false, false, false, true, true, false, true, false ], [ true, true, true, true, true, false, false, false, true ], [ false, false, false, true, false, true, false, false, false ], [ false, false, false, false, false, false, false, false, true ], [ true, false, false, false, false, false, false, false, false ], [ false, false, false, false, false, false, false, false, false ], [ false, true, false, false, true, true, false, false, true ], [ false, false, false, true, false, false, false, false, false ], [ false, true, false, false, false, false, true, false, true ] ]
+obstacle_map = [ [ true, false, false, false, false, false, false, true, false ], [ false, false, true, false, false, false, false, false, false ], [ false, false, false, true, true, true, false, false, false ], [ false, false, false, false, false, false, false, false, false ], [ true, false, true, false, true, false, false, false, true ], [ false, true, false, false, false, false, true, false, true ], [ false, false, true, false, false, false, true, false, false ], [ false, false, true, false, false, false, true, true, false ], [ false, false, true, true, false, false, false, false, true ], [ false, true, false, false, false, false, true, false, false ], [ false, false, false, false, false, false, false, false, false ], [ false, false, true, false, false, false, false, false, true ], [ false, true, true, true, false, false, false, false, false ] ]
 map_width = 13
 map_depth = 9

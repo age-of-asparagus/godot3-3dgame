@@ -3,8 +3,8 @@ extends Spatial
 
 export var GroundScene: PackedScene
 export var ObstacleScene: PackedScene
-
 export var navmesh_template: NavigationMesh
+export var WaveScene: PackedScene
 
 var shader_material : ShaderMaterial
 
@@ -28,6 +28,7 @@ export(bool) var save_level = false setget set_save_level
 
 var level: NavigationMap
 var navmesh_instance: NavigationMeshInstance
+var wave_container: Node
 
 func _ready():
 	pass
@@ -39,6 +40,10 @@ func set_save_level(new_val):
 	var packed_scene = PackedScene.new()
 	navmesh_instance.owner = level
 	for child in navmesh_instance.get_children():
+		child.owner = level
+		
+	wave_container.owner = level
+	for child in wave_container.get_children():
 		child.owner = level
 	
 	packed_scene.pack(level)
@@ -112,9 +117,22 @@ func generate_map():
 	add_ground()
 	update_obstacle_material()
 	add_obstacles()
+	add_waves()
 	
 	set_seed(rng_seed + 1)
 	property_list_changed_notify()
+	
+func add_waves():
+	wave_container = Node.new()
+	wave_container.name = "Waves"
+	
+	var wave = WaveScene.instance()
+	wave_container.add_child(wave)
+	
+	level.add_child(wave_container)
+	
+	wave_container.owner = self
+	wave.owner = self
 	
 func clear_map():
 	for node in get_children():

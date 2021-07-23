@@ -27,6 +27,9 @@ class Coord:
 		
 	func equals(coord):
 		return coord.x == self.x and coord.z == self.z
+		
+func get_waves():
+	return $Waves.get_children()
 
 func _ready():
 	fill_map_coords_array()

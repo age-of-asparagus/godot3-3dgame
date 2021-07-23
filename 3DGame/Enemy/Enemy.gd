@@ -15,6 +15,7 @@ var path = []
 var current_node = 0
 var speed = 2
 var attack_speed_multiplier = 5
+var damage = 1
 
 var attack_target: Vector3
 var return_target: Vector3
@@ -30,6 +31,11 @@ var current_state = state.SEEKING
 
 func set_navmap(new_navmap):
 	navmap = new_navmap
+	
+func set_characteristics(health, damage, move_speed):
+	$Stats.max_HP = health
+	self.damage = damage
+	self.speed = move_speed
 
 func _ready():
 	$MeshInstance.set_surface_material(0, default_material)
@@ -70,7 +76,7 @@ func move_and_attack():
 			state.ATTACKING:
 				# Do damage to the player
 				var player_stats: Stats = player.get_node("Stats")
-				player_stats.take_hit(1)
+				player_stats.take_hit(damage)
 #				print("I hit you: ", player_stats.current_HP, "/", player_stats.max_HP)
 				current_state = state.RETURNING
 				attack_target = return_target

@@ -2,7 +2,7 @@ extends Spatial
 
 export(PackedScene) var Enemy
 onready var timer = $Timer
-var navmap setget set_navmap
+var navmap: NavigationMap setget set_navmap
 
 var enemies_remaining_to_spawn
 var enemies_killed_this_wave
@@ -16,11 +16,8 @@ signal wave_update
 
 func set_navmap(new_navmap):
 	navmap = new_navmap
+	waves = navmap.get_waves()
 
-func _ready():
-	waves = $Waves.get_children()
-#	print("Waves: ", waves)
-	
 func start_next_wave():
 	enemies_killed_this_wave = 0
 	current_wave_number += 1
@@ -41,6 +38,11 @@ func reset():
 func spawn_enemy():
 	# SPAWN!
 	var enemy = Enemy.instance()
+	enemy.set_characteristics(
+		current_wave.health,
+		current_wave.damage,
+		current_wave.move_speed
+	)
 	
 	# Give the enemy a random position, that is NOT in an obstacle
 	var location : Vector3 = navmap.get_random_empty_vec3()

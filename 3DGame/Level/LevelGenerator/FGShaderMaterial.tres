@@ -137,4 +137,4 @@ nodes/fragment/connections = PoolIntArray( 3, 0, 4, 0, 7, 0, 0, 0, 5, 0, 7, 1, 6
 shader = SubResource( 13 )
 shader_param/BackgroundColor = Color( 0.0156863, 0.0745098, 0.984314, 1 )
 shader_param/ForegroundColor = Color( 0.933333, 0.0431373, 0.0431373, 1 )
-shader_param/LevelDepth = 30
+shader_param/LevelDepth = 18
