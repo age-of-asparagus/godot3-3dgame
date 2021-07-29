@@ -55,3 +55,10 @@ func _on_Stats_you_died_signal():
 func _on_Void_body_entered(body):
 	print("AHHHHHHHHH!!!!!!!")
 	queue_free()
+
+func _on_Dropper_item_picked_up(ItemScene: PackedScene):
+	var item = ItemScene.instance()
+	
+	# Hanfle different kinds of pickups:
+	if item is Gun:
+		gun_controller.equip_weapon(ItemScene)

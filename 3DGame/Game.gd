@@ -56,6 +56,7 @@ func new_level():
 		# Move the player back to the middle
 		player.reset_position()
 		# Reset the spawner
+		$Dropper.reset()
 		$Spawner.reset()
 	else:
 		print("You win!")

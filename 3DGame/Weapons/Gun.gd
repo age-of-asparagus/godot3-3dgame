@@ -29,7 +29,7 @@ signal update_ammo
 func _ready():
 	rof_timer.wait_time = millis_between_shots / 1000.0
 	reset_bursts()
-	reload()
+#	reload()
 	init_bullet_spawns()
 	
 func init_bullet_spawns():
@@ -88,7 +88,11 @@ func shoot():
 		
 	return false
 
-
+func drop():
+#	print("Gun dropped")
+	$Mesh.translation = Vector3.ZERO
+	$AnimationPlayer.play("Drop")
+	
 func _on_Timer_timeout():
 #	print("You can shoot again bra")
 	can_shoot = true

@@ -4,6 +4,7 @@
 [ext_resource path="res://Weapons/Bullets/HighPowerBullet.tscn" type="PackedScene" id=2]
 
 [node name="Gun" instance=ExtResource( 1 )]
+transform = Transform( 0.999169, 0, 0.0407478, 0, 1, 0, -0.0407478, 0, 0.999169, 0, 0, 0 )
 gun_name = "Shotgun"
 Bullet = ExtResource( 2 )
 fire_mode = 0

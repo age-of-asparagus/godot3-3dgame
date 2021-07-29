@@ -12,7 +12,7 @@ func _ready():
 	if StartingWeapon:
 		equip_weapon(StartingWeapon)
 
-func equip_weapon(weapon_to_equip):
+func equip_weapon(weapon_to_equip: PackedScene):
 	if equipped_weapon:
 		print("Deleting current weapon")
 		equipped_weapon.queue_free()
@@ -21,6 +21,7 @@ func equip_weapon(weapon_to_equip):
 	equipped_weapon = weapon_to_equip.instance()
 	hand.add_child(equipped_weapon)
 	equipped_weapon.connect("update_ammo", self, "on_Gun_ammo_update")
+	equipped_weapon.reload()
 		
 func hold_trigger():
 	if equipped_weapon:

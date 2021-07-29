@@ -13,6 +13,7 @@ var current_wave_number = -1
 
 signal level_complete
 signal wave_update
+signal drop_item
 
 func set_navmap(new_navmap):
 	navmap = new_navmap
@@ -27,6 +28,9 @@ func start_next_wave():
 		enemies_remaining_to_spawn = current_wave.num_enemies
 		timer.wait_time = current_wave.second_between_spawns
 		timer.start()
+		
+		if current_wave.should_drop(enemies_killed_this_wave):
+			emit_signal("drop_item", current_wave.DropItem)
 	else:
 		# Level complete
 		emit_signal("level_complete")
@@ -61,6 +65,11 @@ func connect_to_enemy_signals(enemy: Enemy):
 func _on_Enemy_Stats_you_died_signal():
 	enemies_killed_this_wave += 1
 	print("Enemies killed: ", enemies_killed_this_wave)
+	
+	# Check if item should drop
+	if current_wave.should_drop(enemies_killed_this_wave):
+		emit_signal("drop_item", current_wave.DropItem)
+		print("DROPPING!!!")
 	
 func _on_Timer_timeout():
 	if enemies_remaining_to_spawn:

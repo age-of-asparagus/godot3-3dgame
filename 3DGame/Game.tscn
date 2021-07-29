@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
 [ext_resource path="res://Level/LevelGenerator/GeneratedLevels/NavMap1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Drops/Dropper.gd" type="Script" id=4]
 [ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Spawning/Spawner.gd" type="Script" id=6]
 [ext_resource path="res://Level/LevelGenerator/GeneratedLevels/NavMap2.tscn" type="PackedScene" id=8]
@@ -11,7 +12,9 @@
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=11]
 [ext_resource path="res://Weapons/Guns/50Cal.tscn" type="PackedScene" id=12]
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="CylinderShape" id=1]
+
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 50, 1, 50 )
 
 [node name="Game" type="Spatial"]
@@ -33,6 +36,17 @@ shadow_contact = 0.5
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 18, 13 )
 
+[node name="Dropper" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+script = ExtResource( 4 )
+
+[node name="PickUpArea" type="Area" parent="Dropper"]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="Dropper/PickUpArea"]
+shape = SubResource( 1 )
+
 [node name="Spawner" type="Spatial" parent="."]
 script = ExtResource( 6 )
 Enemy = ExtResource( 5 )
@@ -43,7 +57,7 @@ Enemy = ExtResource( 5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Void"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 9 )
@@ -153,6 +167,9 @@ __meta__ = {
 
 [connection signal="update_health" from="Player/Stats" to="HUD" method="_on_Stats_update_health"]
 [connection signal="ammo_update" from="Player/GunController" to="HUD" method="_on_GunController_ammo_update"]
+[connection signal="item_picked_up" from="Dropper" to="Player" method="_on_Dropper_item_picked_up"]
+[connection signal="body_entered" from="Dropper/PickUpArea" to="Dropper" method="_on_PickUpArea_body_entered"]
+[connection signal="drop_item" from="Spawner" to="Dropper" method="_on_Spawner_drop_item"]
 [connection signal="level_complete" from="Spawner" to="." method="_on_Spawner_level_complete"]
 [connection signal="wave_update" from="Spawner" to="HUD" method="_on_Spawner_wave_update"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_Timer_timeout"]

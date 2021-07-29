@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Spawning/Wave.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level/LevelGenerator/Obstacle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Level/LevelGenerator/Ground.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Weapons/Guns/Shotgun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Level/LevelGenerator/NavigationMap.gd" type="Script" id=5]
 
 [sub_resource type="NavigationMesh" id=1]
@@ -96,7 +97,11 @@ height = 1.02826
 [node name="Waves" type="Node" parent="."]
 
 [node name="Wave" parent="Waves" instance=ExtResource( 1 )]
-num_enemies = 1
+num_enemies = 2
+DropItem = ExtResource( 4 )
+drop_when = 0.0
 
 [node name="Wave2" parent="Waves" instance=ExtResource( 1 )]
-move_speed = 5.0
+num_enemies = 2
+DropItem = ExtResource( 4 )
+drop_when = 0.0
