@@ -44,9 +44,15 @@ _global_script_class_icons={
 
 [application]
 
-config/name="3D Game"
-run/main_scene="res://Game.tscn"
+config/name="Stadiums of Revolution"
+run/main_scene="res://Title&Menu/TitleScreen.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+window/stretch/mode="2d"
 
 [input]
 
@@ -100,4 +106,5 @@ reload={
 
 [rendering]
 
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"
