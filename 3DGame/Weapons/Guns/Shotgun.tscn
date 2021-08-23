@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Weapons/Gun.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Weapons/Bullets/HighPowerBullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Weapons/Guns/Icons/Icon-Shotgun.png" type="Texture" id=3]
 
 [node name="Gun" instance=ExtResource( 1 )]
 transform = Transform( 0.999169, 0, 0.0407478, 0, 1, 0, -0.0407478, 0, 0.999169, 0, 0, 0 )
 gun_name = "Shotgun"
+icon = ExtResource( 3 )
 Bullet = ExtResource( 2 )
 fire_mode = 0
 mag_capacity = 1

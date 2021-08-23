@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Spawning/Wave.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level/LevelGenerator/Obstacle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Level/LevelGenerator/Ground.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Weapons/Guns/Shotgun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Weapons/Guns/Rifle.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Level/LevelGenerator/NavigationMap.gd" type="Script" id=5]
+[ext_resource path="res://Weapons/Guns/Uzi.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Weapons/Guns/FullyAutoRifle.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Weapons/Guns/50Cal.tscn" type="PackedScene" id=8]
 
 [sub_resource type="NavigationMesh" id=1]
 vertices = PoolVector3Array( -2, 0.4, 4.4, -2, 0.4, 3.8, -3.8, 0.4, 3.5, -3.8, 0.4, 4.7, -9.5, 0.4, -2.2, -9.8, 0.4, -6.4, -10.4, 0.4, -6.4, -10.4, 0.4, 0.2, -3.8, 0.4, -5.5, -1.7, 0.4, -5.8, -1.7, 0.4, -6.4, -6.2, 0.4, -6.4, -9.5, 0.4, 5.9, -9.8, 0.4, 3.8, -10.4, 0.4, 3.8, -10.4, 0.4, 6.5, -6.5, 0.4, 5.9, -3.8, 0.4, 6.5, -3.8, 0.4, 4.7, -6.2, 0.4, 2.6, -6.5, 0.4, 5.9, -3.8, 0.4, 4.7, -3.8, 0.4, 3.5, -3.8, 0.4, 0.5, -2, 0.4, 0.2, -2, 0.4, -2.2, -3.8, 0.4, -2.5, -6.2, 0.4, 2.6, -3.8, 0.4, 3.5, -3.8, 0.4, 0.5, -8.6, 0.4, 0.2, -8.3, 0.4, 2.3, -6.2, 0.4, 2.6, -3.8, 0.4, -5.5, -6.2, 0.4, -6.4, -6.2, 0.4, -2.5, -3.8, 0.4, -2.5, -9.5, 0.4, -2.2, -10.4, 0.4, 0.2, -8.6, 0.4, 0.2, -8.6, 0.4, 0.2, -6.2, 0.4, 2.6, -3.8, 0.4, 0.5, -3.8, 0.4, -2.5, -6.2, 0.4, -2.5, -9.5, 0.4, -2.2, -6.5, 0.4, 5.9, -9.5, 0.4, 5.9, -10.4, 0.4, 6.5, -3.8, 0.4, 6.5, 7.6, 0.4, -3.7, 8.2, 0.4, -1.6, 8.2, 0.4, -3.4, -2, 0.4, 3.8, -2, 0.4, 4.4, -0.5, 0.4, 4.4, -0.2, 0.4, 3.5, 8.2, 0.4, 5.6, 8.2, 0.4, 2.6, 6.7, 0.4, 1.7, 5.5, 0.4, 2.3, 5.8, 0.4, 6.5, -0.5, 0.4, 4.4, -0.2, 0.4, 6.5, 0.400001, 0.4, 6.5, 0.400001, 0.4, 4.7, -0.2, 0.4, 3.5, -2, 0.4, -2.2, -2, 0.4, 0.2, -0.2, 0.4, 0.5, -0.2, 0.4, -2.5, 4.3, 0.4, -3.4, 6.7, 0.4, -4.3, 6.4, 0.4, -6.4, 3.7, 0.4, -6.4, 3.4, 0.4, -4.3, 10.3, 0.4, 6.5, 10.3, 0.4, 5.9, 8.2, 0.4, 5.6, 5.8, 0.4, 6.5, 8.2, 0.4, 2.6, 10.3, 0.4, 2.3, 10.3, 0.4, 1.7, 6.7, 0.4, 1.7, 4.3, 0.4, -0.4, 4.3, 0.4, -3.4, 3.4, 0.4, -4.3, -0.2, 0.4, -2.5, -0.2, 0.4, 0.5, 2.5, 0.4, 2.3, 10.3, 0.4, -6.4, 9.7, 0.4, -6.4, 9.4, 0.4, -4.3, 10.3, 0.4, -3.7, 3.4, 0.4, -4.3, -0.2, 0.4, -4.3, -0.2, 0.4, -2.5, 8.2, 0.4, -3.4, 10.3, 0.4, -3.7, 9.4, 0.4, -4.3, 6.7, 0.4, -4.3, 7.6, 0.4, -3.7, 4.3, 0.4, -3.4, 7.6, 0.4, -3.7, 6.7, 0.4, -4.3, 5.5, 0.4, 2.3, 6.7, 0.4, 1.7, 6.4, 0.4, -0.0999999, 4.3, 0.4, -0.4, 2.5, 0.4, 2.3, -0.2, 0.4, 3.5, 0.400001, 0.4, 4.7, 2.2, 0.4, 4.4, 2.5, 0.4, 2.3, -0.2, 0.4, 0.5 )
@@ -97,11 +100,21 @@ height = 1.02826
 [node name="Waves" type="Node" parent="."]
 
 [node name="Wave" parent="Waves" instance=ExtResource( 1 )]
-num_enemies = 2
-DropItem = ExtResource( 4 )
+num_enemies = 1
+DropItem = ExtResource( 6 )
 drop_when = 0.0
 
 [node name="Wave2" parent="Waves" instance=ExtResource( 1 )]
-num_enemies = 2
+num_enemies = 1
 DropItem = ExtResource( 4 )
+drop_when = 0.0
+
+[node name="Wave3" parent="Waves" instance=ExtResource( 1 )]
+num_enemies = 1
+DropItem = ExtResource( 7 )
+drop_when = 0.0
+
+[node name="Wave4" parent="Waves" instance=ExtResource( 1 )]
+num_enemies = 1
+DropItem = ExtResource( 8 )
 drop_when = 0.0

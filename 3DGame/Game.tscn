@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
@@ -10,12 +10,16 @@
 [ext_resource path="res://game_env.tres" type="Environment" id=9]
 [ext_resource path="res://HUD/hud_theme.tres" type="Theme" id=10]
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=11]
-[ext_resource path="res://Weapons/Guns/50Cal.tscn" type="PackedScene" id=12]
+[ext_resource path="res://HUD/WeaponSelector/WeaponSelector.gd" type="Script" id=14]
+[ext_resource path="res://Weapons/Guns/Shotgun.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Weapons/Guns/Pistol.tscn" type="PackedScene" id=16]
 
 [sub_resource type="CylinderShape" id=1]
 
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 50, 1, 50 )
+
+[sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="Game" type="Spatial"]
 script = ExtResource( 2 )
@@ -26,7 +30,7 @@ transform = Transform( -0.639962, 0, 0.768406, 0, 1, 0, -0.768406, 0, -0.639962,
 collision_layer = 2
 
 [node name="GunController" parent="Player" index="2"]
-StartingWeapon = ExtResource( 12 )
+StartingWeapon = ExtResource( 16 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.00540057, -0.937422, 0.348153, -0.632528, 0.266457, 0.727262, -0.774519, -0.224144, -0.591506, 9, 6, 0 )
@@ -75,15 +79,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridContainer" type="GridContainer" parent="HUD"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
+anchor_bottom = 1.0
+margin_right = 135.0
+custom_constants/separation = 65
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="HUD/VBoxContainer"]
+margin_right = 300.0
+margin_bottom = 70.0
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelLabel" type="Label" parent="HUD/GridContainer"]
+[node name="LevelLabel" type="Label" parent="HUD/VBoxContainer/GridContainer"]
 margin_right = 91.0
 margin_bottom = 33.0
 text = "LEVEL: "
@@ -91,7 +103,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelValue" type="Label" parent="HUD/GridContainer"]
+[node name="LevelValue" type="Label" parent="HUD/VBoxContainer/GridContainer"]
 margin_left = 95.0
 margin_right = 112.0
 margin_bottom = 33.0
@@ -100,7 +112,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WaveLabel" type="Label" parent="HUD/GridContainer"]
+[node name="WaveLabel" type="Label" parent="HUD/VBoxContainer/GridContainer"]
 margin_top = 37.0
 margin_right = 91.0
 margin_bottom = 70.0
@@ -109,7 +121,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WaveValue" type="Label" parent="HUD/GridContainer"]
+[node name="WaveValue" type="Label" parent="HUD/VBoxContainer/GridContainer"]
 margin_left = 95.0
 margin_top = 37.0
 margin_right = 112.0
@@ -119,17 +131,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridContainer2" type="GridContainer" parent="HUD"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -70.0
-margin_right = 112.0
+[node name="WeaponSelector" type="ItemList" parent="HUD/VBoxContainer"]
+margin_top = 135.0
+margin_right = 300.0
+margin_bottom = 545.0
+rect_min_size = Vector2( 300, 0 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_vertical = 3
+custom_styles/bg = SubResource( 3 )
+fixed_icon_size = Vector2( 64, 64 )
+script = ExtResource( 14 )
+weapon_inventory = [ ExtResource( 16 ), ExtResource( 15 ) ]
+
+[node name="GridContainer2" type="GridContainer" parent="HUD/VBoxContainer"]
+margin_top = 610.0
+margin_right = 300.0
+margin_bottom = 680.0
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HealthLabel" type="Label" parent="HUD/GridContainer2"]
+[node name="HealthLabel" type="Label" parent="HUD/VBoxContainer/GridContainer2"]
 margin_right = 114.0
 margin_bottom = 33.0
 text = "HEALTH: "
@@ -137,7 +161,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HealthValue" type="Label" parent="HUD/GridContainer2"]
+[node name="HealthValue" type="Label" parent="HUD/VBoxContainer/GridContainer2"]
 margin_left = 118.0
 margin_right = 135.0
 margin_bottom = 33.0
@@ -146,7 +170,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AmmoLabel" type="Label" parent="HUD/GridContainer2"]
+[node name="AmmoLabel" type="Label" parent="HUD/VBoxContainer/GridContainer2"]
 margin_top = 37.0
 margin_right = 114.0
 margin_bottom = 70.0
@@ -155,7 +179,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AmmoValue" type="Label" parent="HUD/GridContainer2"]
+[node name="AmmoValue" type="Label" parent="HUD/VBoxContainer/GridContainer2"]
 margin_left = 118.0
 margin_top = 37.0
 margin_right = 135.0
@@ -168,11 +192,14 @@ __meta__ = {
 [connection signal="update_health" from="Player/Stats" to="HUD" method="_on_Stats_update_health"]
 [connection signal="ammo_update" from="Player/GunController" to="HUD" method="_on_GunController_ammo_update"]
 [connection signal="item_picked_up" from="Dropper" to="Player" method="_on_Dropper_item_picked_up"]
+[connection signal="item_picked_up" from="Dropper" to="HUD/VBoxContainer/WeaponSelector" method="_on_Dropper_item_picked_up"]
 [connection signal="body_entered" from="Dropper/PickUpArea" to="Dropper" method="_on_PickUpArea_body_entered"]
 [connection signal="drop_item" from="Spawner" to="Dropper" method="_on_Spawner_drop_item"]
 [connection signal="level_complete" from="Spawner" to="." method="_on_Spawner_level_complete"]
 [connection signal="wave_update" from="Spawner" to="HUD" method="_on_Spawner_wave_update"]
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Void" to="Player" method="_on_Void_body_entered"]
+[connection signal="item_selected" from="HUD/VBoxContainer/WeaponSelector" to="HUD/VBoxContainer/WeaponSelector" method="_on_WeaponSelector_item_selected"]
+[connection signal="weapon_selected" from="HUD/VBoxContainer/WeaponSelector" to="Player" method="_on_WeaponSelector_weapon_selected"]
 
 [editable path="Player"]

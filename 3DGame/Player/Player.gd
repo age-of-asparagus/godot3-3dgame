@@ -47,6 +47,13 @@ func _physics_process(delta):
 
 func reset_position():
 	global_transform.origin = Vector3(0, 3, 0)
+	
+func equip_item(ItemScene: PackedScene):
+	var item = ItemScene.instance()
+	
+	# Handle different kinds of pickups:
+	if item is Gun:
+		gun_controller.equip_weapon(ItemScene)
 
 func _on_Stats_you_died_signal():
 	print("GAME OVER")
@@ -57,8 +64,7 @@ func _on_Void_body_entered(body):
 	queue_free()
 
 func _on_Dropper_item_picked_up(ItemScene: PackedScene):
-	var item = ItemScene.instance()
-	
-	# Hanfle different kinds of pickups:
-	if item is Gun:
-		gun_controller.equip_weapon(ItemScene)
+	equip_item(ItemScene)
+
+func _on_WeaponSelector_weapon_selected(ItemScene: PackedScene):
+	equip_item(ItemScene)

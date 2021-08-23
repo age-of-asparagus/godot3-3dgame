@@ -7,7 +7,7 @@
 [ext_resource path="res://Weapons/BulletSpawns/BulletSpawnLeft.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Weapons/GunMaterial.tres" type="Material" id=6]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 resource_name = "Drop"
 length = 2.0
 loop = true
@@ -24,8 +24,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Recoil"
+[sub_resource type="Animation" id=2]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -52,8 +51,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0.3 ), Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Reload"
+[sub_resource type="Animation" id=3]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
@@ -82,7 +80,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="CubeMesh" id=3]
+[sub_resource type="CubeMesh" id=4]
 
 [node name="Gun" type="Spatial"]
 script = ExtResource( 2 )
@@ -93,26 +91,26 @@ BulletSpawns = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Drop = SubResource( 4 )
-anims/Recoil = SubResource( 1 )
-anims/Reload = SubResource( 2 )
+anims/Drop = SubResource( 1 )
+anims/Recoil = SubResource( 2 )
+anims/Reload = SubResource( 3 )
 
 [node name="Mesh" type="Spatial" parent="."]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -1.4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Mesh"]
 transform = Transform( 0.9, 0, 0, 0, 0.2187, 0, 0, 0, 0.2304, 0, 0, 0 )
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = ExtResource( 6 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="Mesh"]
 transform = Transform( 0.254558, -0.154644, 0, 0.254558, 0.154644, 0, 0, 0, 0.2304, -0.847146, -0.30766, 0 )
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = ExtResource( 6 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="Mesh"]
 transform = Transform( -0.137662, -0.202079, 0, 0.33264, -0.0836294, 0, 0, 0, 0.2304, 0.330731, -0.316651, 0 )
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = ExtResource( 6 )
 
 [node name="Muzzle" type="Spatial" parent="Mesh"]

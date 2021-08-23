@@ -8,6 +8,7 @@ enum FireMode {
 }
 
 export var gun_name = "Gun"
+export(Texture) var icon
 export(PackedScene) var Bullet
 export(Array, PackedScene) var BulletSpawns
 export var muzzle_speed = 30

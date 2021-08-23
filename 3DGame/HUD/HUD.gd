@@ -1,9 +1,9 @@
 extends Control
 
-onready var level = $GridContainer/LevelValue
-onready var wave = $GridContainer/WaveValue
-onready var health = $GridContainer2/HealthValue
-onready var ammo = $GridContainer2/AmmoValue
+onready var level = $VBoxContainer/GridContainer/LevelValue
+onready var wave = $VBoxContainer/GridContainer/WaveValue
+onready var health = $VBoxContainer/GridContainer2/HealthValue
+onready var ammo = $VBoxContainer/GridContainer2/AmmoValue
 
 func _ready():
 	pass
